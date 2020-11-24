@@ -50,6 +50,16 @@ function rgbObjectToHex(rgbObject) {
   return `#${rgbHex}`;
 }
 
+function isRgbObject(rgbObject) {
+  return (
+    rgbObject
+    && typeof rgbObject === 'object'
+    && 'r' in rgbObject
+    && 'g' in rgbObject
+    && 'b' in rgbObject
+  );
+}
+
 export function hexToRgbObject(rawHex) {
   if (!rawHex) {
     return null;
@@ -116,4 +126,61 @@ export function rgbToHex(rgb) {
   const rgbObject = rgbToRgbObject(rgb);
 
   return rgbObjectToHex(rgbObject);
+}
+
+function toRgbObject(hexOrRgb) {
+  if (isRgbObject(hexOrRgb)) {
+    return hexOrRgb;
+  }
+
+  return hexToRgbObject(hexOrRgb) || rgbToRgbObject(hexOrRgb);
+}
+
+export function addAlpha(hexOrRgb, a) {
+  const rgbObject = toRgbObject(hexOrRgb);
+
+  if (!rgbObject) {
+    return null;
+  }
+
+  return rgbObjectToRgb({ ...rgbObject, a });
+}
+
+function mixChannels(channel1, channel2, ratio) {
+  const channelA = channel1 * ratio;
+  const channelB = channel2 * (1 - ratio);
+
+  return Math.round(channelA + channelB);
+}
+
+export function mixColors(color1, color2, ratio) {
+  if (!color1 || !color2) {
+    return null;
+  }
+
+  const rgbObject1 = toRgbObject(color1);
+  const rgbObject2 = toRgbObject(color2);
+
+  if (!rgbObject1 || !rgbObject2) {
+    return null;
+  }
+
+  const { r: r1, g: g1, b: b1 } = rgbObject1;
+  const { r: r2, g: g2, b: b2 } = rgbObject2;
+
+  const rgbObject = {
+    r: mixChannels(r1, r2, ratio),
+    g: mixChannels(g1, g2, ratio),
+    b: mixChannels(b1, b2, ratio),
+  };
+
+  return rgbObjectToHex(rgbObject);
+}
+
+export function mixWhite(hexOrRgb, a) {
+  return mixColors(hexOrRgb, '#fff', a);
+}
+
+export function mixBlack(hexOrRgb, a) {
+  return mixColors(hexOrRgb, '#000', a);
 }

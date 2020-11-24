@@ -13,6 +13,22 @@ A collection of color-related utilities.
 
 ## User guide
 
+### `addAlpha()`
+
+Adds alpha channel to a given color.
+
+#### Sample usage
+
+```js
+import { addAlpha } from '@wojtekmaj/color-utils';
+
+addAlpha('#f00', 0.5); // "rgba(255, 0, 0, 0.5)"
+addAlpha('#00ff00', 0.1); // "rgba(0, 255, 0, 0.1)"
+hexToRgb('#0000ff80', 0.1); // "rgba(0, 0, 255, 0.1)"
+rgbToRgbObject('rgb(255, 0, 0)', 0.5); // "rgba(255, 0, 0, 0.5)"
+rgbToRgbObject('rgba(0, 0, 255, 0.5)', 0.1); // "rgba(0, 0, 255, 0.1)"
+```
+
 ### `hexToRgbObject()`
 
 Converts hex to an object with r, g, b, a? properties.
@@ -39,6 +55,45 @@ import { hexToRgb } from '@wojtekmaj/color-utils';
 hexToRgb('#f00'); // "rgb(255, 0, 0)"
 hexToRgb('#00ff00'); // "rgb(0, 255, 0)"
 hexToRgb('#0000ff80'); // "rgba(0, 0, 255, 0.5)"
+```
+
+### `mixColors()`
+
+Mixes colors together.
+
+#### Sample usage
+
+```js
+import { mixColors } from '@wojtekmaj/color-utils';
+
+mixColors('#ff0000', '#000', 0.5); // "#800000"
+mixColors('rgb(255, 0, 0)', '#fff', 0.5); // "#ff8080"
+```
+
+### `mixBlack()`
+
+Mixes color with black.
+
+#### Sample usage
+
+```js
+import { mixBlack } from '@wojtekmaj/color-utils';
+
+mixBlack('#ff0000', 0.5); // "#800000"
+mixBlack('rgb(255, 0, 0)', 0.5); // "#800000"
+```
+
+### `mixWhite()`
+
+Mixes color with white.
+
+#### Sample usage
+
+```js
+import { mixWhite } from '@wojtekmaj/color-utils';
+
+mixWhite('#ff0000', 0.5); // "#ff8080"
+mixWhite('rgb(255, 0, 0)', 0.5); // "#ff8080"
 ```
 
 ### `rgbToRgbObject()`
