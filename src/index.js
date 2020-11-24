@@ -1,3 +1,55 @@
+function hexColorToNumber(color) {
+  return parseInt(color, 16);
+}
+
+function hexAlphaToNumber(color) {
+  return Math.round((hexColorToNumber(color) / 255) * 100) / 100;
+}
+
+function numberColorToHex(color) {
+  return `0${Number(color).toString(16)}`.slice(-2);
+}
+
+function numberAlphaToHex(color) {
+  return numberColorToHex(Math.round(Number(color) * 255));
+}
+
+function rgbObjectToRgb(rgbObject) {
+  if (!rgbObject) {
+    return null;
+  }
+
+  const {
+    r, g, b, a,
+  } = rgbObject;
+
+  const rgb = [r, g, b].join(', ');
+
+  if (a !== undefined) {
+    return `rgba(${rgb}, ${a})`;
+  }
+
+  return `rgb(${rgb})`;
+}
+
+function rgbObjectToHex(rgbObject) {
+  if (!rgbObject) {
+    return null;
+  }
+
+  const {
+    r, g, b, a,
+  } = rgbObject;
+
+  const rgbHex = [r, g, b].map(numberColorToHex).join('');
+
+  if (a !== undefined) {
+    return `#${rgbHex}${numberAlphaToHex(a)}`;
+  }
+
+  return `#${rgbHex}`;
+}
+
 export function hexToRgbObject(rawHex) {
   if (!rawHex) {
     return null;
@@ -15,18 +67,14 @@ export function hexToRgbObject(rawHex) {
 
   const [, rawR, rawG, rawB, rawA] = match;
 
-  function parse(c) {
-    return parseInt(c, 16);
-  }
-
   const result = {
-    r: parse(rawR),
-    g: parse(rawG),
-    b: parse(rawB),
+    r: hexColorToNumber(rawR),
+    g: hexColorToNumber(rawG),
+    b: hexColorToNumber(rawB),
   };
 
   if (rawA !== undefined) {
-    result.a = Math.round((parse(rawA) / 255) * 100) / 100;
+    result.a = hexAlphaToNumber(rawA);
   }
 
   return result;
@@ -35,21 +83,7 @@ export function hexToRgbObject(rawHex) {
 export function hexToRgb(hex) {
   const rgbObject = hexToRgbObject(hex);
 
-  if (!rgbObject) {
-    return null;
-  }
-
-  const {
-    r, g, b, a,
-  } = rgbObject;
-
-  const rgb = `${r}, ${g}, ${b}`;
-
-  if (a !== undefined) {
-    return `rgba(${rgb}, ${a})`;
-  }
-
-  return `rgb(${rgb})`;
+  return rgbObjectToRgb(rgbObject);
 }
 
 export function rgbToRgbObject(rgb) {
@@ -57,53 +91,29 @@ export function rgbToRgbObject(rgb) {
     return null;
   }
 
-  const matchRgb = /^rgb\((\d{0,3}),\s?(\d{0,3}),\s?(\d{0,3})\)$/i.exec(rgb);
-  const matchRgba = /^rgba\((\d{0,3}),\s?(\d{0,3}),\s?(\d{0,3}),\s?((0?\.)?\d{0,3})\)$/i.exec(rgb);
+  const match = /^rgba?\((\d{0,3}),\s?(\d{0,3}),\s?(\d{0,3})(,\s?((0?\.)?\d*))?\)$/i.exec(rgb);
 
-  if (matchRgb) {
-    const [, r, g, b] = matchRgb;
-
-    return {
-      r: Number(r),
-      g: Number(g),
-      b: Number(b),
-    };
+  if (!match) {
+    return null;
   }
 
-  if (matchRgba) {
-    const [, r, g, b, a] = matchRgba;
+  const [, rawR, rawG, rawB, , rawA] = match;
 
-    return {
-      r: Number(r),
-      g: Number(g),
-      b: Number(b),
-      a: Number(a),
-    };
+  const result = {
+    r: Number(rawR),
+    g: Number(rawG),
+    b: Number(rawB),
+  };
+
+  if (rawA !== undefined) {
+    result.a = Number(rawA);
   }
 
-  return null;
+  return result;
 }
 
 export function rgbToHex(rgb) {
   const rgbObject = rgbToRgbObject(rgb);
 
-  if (!rgbObject) {
-    return null;
-  }
-
-  const {
-    r, g, b, a,
-  } = rgbObject;
-
-  function parse(c) {
-    return `00${Number(c).toString(16)}`.slice(-2);
-  }
-
-  const rgbHex = `${parse(r)}${parse(g)}${parse(b)}`;
-
-  if (a !== undefined) {
-    return `#${rgbHex}${parse(Math.round(Number(a) * 255))}`;
-  }
-
-  return `#${rgbHex}`;
+  return rgbObjectToHex(rgbObject);
 }
