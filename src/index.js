@@ -14,7 +14,7 @@ function numberAlphaToHex(color) {
   return numberColorToHex(Math.round(Number(color) * 255));
 }
 
-function rgbObjectToRgb(rgbObject) {
+function objectToRgb(rgbObject) {
   if (!rgbObject) {
     return null;
   }
@@ -32,7 +32,7 @@ function rgbObjectToRgb(rgbObject) {
   return `rgb(${rgb})`;
 }
 
-function rgbObjectToHex(rgbObject) {
+function objectToHex(rgbObject) {
   if (!rgbObject) {
     return null;
   }
@@ -60,7 +60,7 @@ function isRgbObject(rgbObject) {
   );
 }
 
-export function hexToRgbObject(rawHex) {
+function hexToObject(rawHex) {
   if (!rawHex) {
     return null;
   }
@@ -90,13 +90,7 @@ export function hexToRgbObject(rawHex) {
   return result;
 }
 
-export function hexToRgb(hex) {
-  const rgbObject = hexToRgbObject(hex);
-
-  return rgbObjectToRgb(rgbObject);
-}
-
-export function rgbToRgbObject(rgb) {
+function rgbToObject(rgb) {
   if (!rgb) {
     return null;
   }
@@ -122,28 +116,31 @@ export function rgbToRgbObject(rgb) {
   return result;
 }
 
-export function rgbToHex(rgb) {
-  const rgbObject = rgbToRgbObject(rgb);
-
-  return rgbObjectToHex(rgbObject);
-}
-
-function toRgbObject(hexOrRgb) {
-  if (isRgbObject(hexOrRgb)) {
-    return hexOrRgb;
+/**
+ * Converts color to { r, g, b, a? } object.
+ *
+ * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @returns {Object} Color as { r, g, b, a? } object
+ */
+export function toObject(color) {
+  if (isRgbObject(color)) {
+    return color;
   }
 
-  return hexToRgbObject(hexOrRgb) || rgbToRgbObject(hexOrRgb);
+  return hexToObject(color) || rgbToObject(color);
 }
 
-export function addAlpha(hexOrRgb, a) {
-  const rgbObject = toRgbObject(hexOrRgb);
+/**
+ * Adds/changes alpha channel in a given color.
+ *
+ * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {Number} a Alpha (0-1)
+ * @returns {String} Color with alpha channel added/changed
+ */
+export function alpha(color, a) {
+  const rgbObject = toObject(color);
 
-  if (!rgbObject) {
-    return null;
-  }
-
-  return rgbObjectToRgb({ ...rgbObject, a });
+  return objectToRgb(rgbObject && { ...rgbObject, a });
 }
 
 function mixChannels(channel1, channel2, ratio) {
@@ -153,13 +150,21 @@ function mixChannels(channel1, channel2, ratio) {
   return Math.round(channelA + channelB);
 }
 
-export function mixColors(color1, color2, ratio) {
+/**
+ * Mixes two colors together.
+ *
+ * @param {String|Object} color1 Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {String|Object} color2 Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {Number} [ratio=0.5] Ratio at which colors should be mixed
+ * @returns {String} Color in hex format
+ */
+export function mix(color1, color2, ratio = 0.5) {
   if (!color1 || !color2) {
     return null;
   }
 
-  const rgbObject1 = toRgbObject(color1);
-  const rgbObject2 = toRgbObject(color2);
+  const rgbObject1 = toObject(color1);
+  const rgbObject2 = toObject(color2);
 
   if (!rgbObject1 || !rgbObject2) {
     return null;
@@ -174,13 +179,51 @@ export function mixColors(color1, color2, ratio) {
     b: mixChannels(b1, b2, ratio),
   };
 
-  return rgbObjectToHex(rgbObject);
+  return objectToHex(rgbObject);
 }
 
-export function mixWhite(hexOrRgb, a) {
-  return mixColors(hexOrRgb, '#fff', a);
+/**
+ * Mixes color with white.
+ *
+ * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {Number} [ratio=0.5] Ratio at which colors should be mixed
+ * @returns {String} Color in hex format
+ */
+export function mixWhite(color, ratio) {
+  return mix(color, 'fff', ratio);
 }
 
-export function mixBlack(hexOrRgb, a) {
-  return mixColors(hexOrRgb, '#000', a);
+/**
+ * Mixes color with black.
+ *
+ * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {Number} [ratio=0.5] Ratio at which colors should be mixed
+ * @returns {String} Color in hex format
+ */
+export function mixBlack(color, ratio) {
+  return mix(color, '000', ratio);
+}
+
+/**
+ * Converts color to hex format.
+ *
+ * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @returns {String} Color in hex format
+ */
+export function toHex(color) {
+  const rgbObject = toObject(color);
+
+  return objectToHex(rgbObject);
+}
+
+/**
+ * Converts color to rgb(…) or rgba(…) format, whichever is applicable.
+ *
+ * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @returns {String} Color in rgb(…) or rgba(…) format, whichever is applicable
+ */
+export function toRgb(color) {
+  const rgbObject = toObject(color);
+
+  return objectToRgb(rgbObject);
 }

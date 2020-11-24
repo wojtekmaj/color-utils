@@ -8,66 +8,38 @@ A collection of color-related utilities.
 * Import by adding `import * as colorUtils from '@wojtekmaj/color-utils'`.
 * Do stuff with it!
     ```js
-    const redRgb = hexToRgb('#ff0000');
+    toRgb('#ff0000'); // "rgb(255, 0, 0)"
     ```
 
 ## User guide
 
-### `addAlpha()`
+### `alpha()`
 
-Adds alpha channel to a given color.
+Adds/changes alpha channel in a given color.
 
 #### Sample usage
 
 ```js
-import { addAlpha } from '@wojtekmaj/color-utils';
+import { alpha } from '@wojtekmaj/color-utils';
 
-addAlpha('#f00', 0.5); // "rgba(255, 0, 0, 0.5)"
-addAlpha('#00ff00', 0.1); // "rgba(0, 255, 0, 0.1)"
-hexToRgb('#0000ff80', 0.1); // "rgba(0, 0, 255, 0.1)"
-rgbToRgbObject('rgb(255, 0, 0)', 0.5); // "rgba(255, 0, 0, 0.5)"
-rgbToRgbObject('rgba(0, 0, 255, 0.5)', 0.1); // "rgba(0, 0, 255, 0.1)"
+alpha('#f00', 0.5); // "rgba(255, 0, 0, 0.5)"
+alpha('#00ff00', 0.1); // "rgba(0, 255, 0, 0.1)"
+alpha('#0000ff80', 0.1); // "rgba(0, 0, 255, 0.1)"
+alpha('rgb(255, 0, 0)', 0.5); // "rgba(255, 0, 0, 0.5)"
+alpha('rgba(0, 0, 255, 0.5)', 0.1); // "rgba(0, 0, 255, 0.1)"
 ```
 
-### `hexToRgbObject()`
+### `mix()`
 
-Converts hex to an object with r, g, b, a? properties.
-
-#### Sample usage
-
-```js
-import { hexToRgbObject } from '@wojtekmaj/color-utils';
-
-hexToRgbObject('#f00'); // { r: 255, g: 0, b: 0 }
-hexToRgbObject('#00ff00'); // { r: 0, g: 255, b: 0 }
-hexToRgbObject('#0000ff80'); // { r: 0, g: 0, b: 255, a: 0.5 }
-```
-
-### `hexToRgb()`
-
-Converts hex to rgb(…) or rgba(…), whichever is applicable.
+Mixes colors together. If ratio is not given, colors are blended evenly (ratio = 0.5).
 
 #### Sample usage
 
 ```js
-import { hexToRgb } from '@wojtekmaj/color-utils';
+import { mix } from '@wojtekmaj/color-utils';
 
-hexToRgb('#f00'); // "rgb(255, 0, 0)"
-hexToRgb('#00ff00'); // "rgb(0, 255, 0)"
-hexToRgb('#0000ff80'); // "rgba(0, 0, 255, 0.5)"
-```
-
-### `mixColors()`
-
-Mixes colors together.
-
-#### Sample usage
-
-```js
-import { mixColors } from '@wojtekmaj/color-utils';
-
-mixColors('#ff0000', '#000', 0.5); // "#800000"
-mixColors('rgb(255, 0, 0)', '#fff', 0.5); // "#ff8080"
+mix('#ff0000', '#000', 0.5); // "#800000"
+mix('rgb(255, 0, 0)', '#fff', 0.5); // "#ff8080"
 ```
 
 ### `mixBlack()`
@@ -96,32 +68,49 @@ mixWhite('#ff0000', 0.5); // "#ff8080"
 mixWhite('rgb(255, 0, 0)', 0.5); // "#ff8080"
 ```
 
-### `rgbToRgbObject()`
+### `toHex()`
 
-Converts rgb(…) or rgba(…) to an object with r, g, b, a? properties.
+Converts color to hex format.
 
 #### Sample usage
 
 ```js
-import { rgbToRgbObject } from '@wojtekmaj/color-utils';
+import { toHex } from '@wojtekmaj/color-utils';
 
-rgbToRgbObject('rgb(255, 0, 0)'); // { r: 255, g: 0, b: 0 }
-rgbToRgbObject('rgb(0, 255, 0)'); // { r: 0, g: 255, b: 0 }
-rgbToRgbObject('rgba(0, 0, 255, 0.5)'); // { r: 0, g: 0, b: 255, a: 0.5 }
+toHex('rgb(255, 0, 0)'); // "#ff0000"
+toHex('rgb(0, 255, 0)'); // "#00ff00"
+toHex('rgba(0, 0, 255, 0.5)'); // "#0000ff80"
 ```
 
-### `rgbToHex()`
+### `toObject()`
 
-Converts rgb(…) or rgba(…) to hex.
+Converts color to { r, g, b, a? } object.
 
 #### Sample usage
 
 ```js
-import { rgbToHex } from '@wojtekmaj/color-utils';
+import { toObject } from '@wojtekmaj/color-utils';
 
-rgbToHex('rgb(255, 0, 0)'); // "#ff0000"
-rgbToHex('rgb(0, 255, 0)'); // "#00ff00"
-rgbToHex('rgba(0, 0, 255, 0.5)'); // "#0000ff80"
+toObject('#f00'); // { r: 255, g: 0, b: 0 }
+toObject('#00ff00'); // { r: 0, g: 255, b: 0 }
+toObject('#0000ff80'); // { r: 0, g: 0, b: 255, a: 0.5 }
+toObject('rgb(255, 0, 0)'); // { r: 255, g: 0, b: 0 }
+toObject('rgb(0, 255, 0)'); // { r: 0, g: 255, b: 0 }
+toObject('rgba(0, 0, 255, 0.5)'); // { r: 0, g: 0, b: 255, a: 0.5 }
+```
+
+### `toRgb()`
+
+Converts color to rgb(…) or rgba(…) format, whichever is applicable.
+
+#### Sample usage
+
+```js
+import { toRgb } from '@wojtekmaj/color-utils';
+
+toRgb('#f00'); // "rgb(255, 0, 0)"
+toRgb('#00ff00'); // "rgb(0, 255, 0)"
+toRgb('#0000ff80'); // "rgba(0, 0, 255, 0.5)"
 ```
 
 ## License
