@@ -119,7 +119,7 @@ function rgbToObject(rgb) {
 /**
  * Converts color to { r, g, b, a? } object.
  *
- * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {string|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
  * @returns {Object} Color as { r, g, b, a? } object
  */
 export function toObject(color) {
@@ -133,8 +133,8 @@ export function toObject(color) {
 /**
  * Adds/changes alpha channel in a given color.
  *
- * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
- * @param {Number} a Alpha (0-1)
+ * @param {string|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {number} a Alpha (0-1)
  * @returns {String} Color with alpha channel added/changed
  */
 export function alpha(color, a) {
@@ -153,9 +153,9 @@ function mixChannels(channel1, channel2, ratio) {
 /**
  * Mixes two colors together.
  *
- * @param {String|Object} color1 Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
- * @param {String|Object} color2 Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
- * @param {Number} [ratio=0.5] Ratio at which colors should be mixed
+ * @param {string|Object} color1 Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {string|Object} color2 Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {number} [ratio=0.5] Ratio at which colors should be mixed
  * @returns {String} Color in hex format
  */
 export function mix(color1, color2, ratio = 0.5) {
@@ -185,8 +185,8 @@ export function mix(color1, color2, ratio = 0.5) {
 /**
  * Mixes color with white.
  *
- * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
- * @param {Number} [ratio=0.5] Ratio at which colors should be mixed
+ * @param {string|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {number} [ratio=0.5] Ratio at which colors should be mixed
  * @returns {String} Color in hex format
  */
 export function mixWhite(color, ratio) {
@@ -196,8 +196,8 @@ export function mixWhite(color, ratio) {
 /**
  * Mixes color with black.
  *
- * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
- * @param {Number} [ratio=0.5] Ratio at which colors should be mixed
+ * @param {string|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {number} [ratio=0.5] Ratio at which colors should be mixed
  * @returns {String} Color in hex format
  */
 export function mixBlack(color, ratio) {
@@ -207,7 +207,7 @@ export function mixBlack(color, ratio) {
 /**
  * Converts color to hex format.
  *
- * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {string|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
  * @returns {String} Color in hex format
  */
 export function toHex(color) {
@@ -219,7 +219,7 @@ export function toHex(color) {
 /**
  * Converts color to rgb(…) or rgba(…) format, whichever is applicable.
  *
- * @param {String|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
+ * @param {string|Object} color Color as hex, rgb(…), rgba(…) or { r, g, b, a? } object
  * @returns {String} Color in rgb(…) or rgba(…) format, whichever is applicable
  */
 export function toRgb(color) {
