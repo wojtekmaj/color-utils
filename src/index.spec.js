@@ -73,15 +73,16 @@ describe('mixBlack()', () => {
 
 describe('mixWhite()', () => {
   it.each`
-    input               | ratio   | expectedResult
-    ${null}             | ${0}    | ${null}
-    ${'potato'}         | ${0}    | ${null}
-    ${'#f00'}           | ${0.5}  | ${'#ff8080'}
-    ${'#ff0000'}        | ${0.5}  | ${'#ff8080'}
-    ${'#5bc6e8'}        | ${0.16} | ${'#e5f6fb'}
-    ${'rgb(255, 0, 0)'} | ${0.5}  | ${'#ff8080'}
-    ${'rgb(255,0,0)'}   | ${0.5}  | ${'#ff8080'}
-    ${'rgb(0, 255, 0)'} | ${0.1}  | ${'#e6ffe6'}
+    input                   | ratio   | expectedResult
+    ${null}                 | ${0}    | ${null}
+    ${'potato'}             | ${0}    | ${null}
+    ${'#f00'}               | ${0.5}  | ${'#ff8080'}
+    ${'#ff0000'}            | ${0.5}  | ${'#ff8080'}
+    ${'#5bc6e8'}            | ${0.16} | ${'#e5f6fb'}
+    ${'rgb(255, 0, 0)'}     | ${0.5}  | ${'#ff8080'}
+    ${'rgb(255,0,0)'}       | ${0.5}  | ${'#ff8080'}
+    ${'rgb(0, 255, 0)'}     | ${0.1}  | ${'#e6ffe6'}
+    ${'rgba(0, 0, 0, 0.1)'} | ${1}    | ${'#e6e6e6'}
   `('returns $expectedResult for $input, $ratio', ({ input, ratio, expectedResult }) => {
     const result = mixWhite(input, ratio);
 

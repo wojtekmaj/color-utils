@@ -170,13 +170,19 @@ export function mix(color1, color2, ratio = 0.5) {
     return null;
   }
 
-  const { r: r1, g: g1, b: b1 } = rgbObject1;
-  const { r: r2, g: g2, b: b2 } = rgbObject2;
+  const {
+    r: r1, g: g1, b: b1, a: a1 = 1,
+  } = rgbObject1;
+  const {
+    r: r2, g: g2, b: b2, a: a2 = 1,
+  } = rgbObject2;
+
+  const ratioWithAlpha = ratio * (a1 / a2);
 
   const rgbObject = {
-    r: mixChannels(r1, r2, ratio),
-    g: mixChannels(g1, g2, ratio),
-    b: mixChannels(b1, b2, ratio),
+    r: mixChannels(r1, r2, ratioWithAlpha),
+    g: mixChannels(g1, g2, ratioWithAlpha),
+    b: mixChannels(b1, b2, ratioWithAlpha),
   };
 
   return objectToHex(rgbObject);
