@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/@wojtekmaj/color-utils.svg)](https://www.npmjs.com/package/@wojtekmaj/color-utils) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/color-utils.svg) [![CI](https://github.com/wojtekmaj/color-utils/workflows/CI/badge.svg)](https://github.com/wojtekmaj/color-utils/actions) ![dependencies](https://img.shields.io/david/wojtekmaj/color-utils.svg) ![dev dependencies](https://img.shields.io/david/dev/wojtekmaj/color-utils.svg) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![npm](https://img.shields.io/npm/v/@wojtekmaj/color-utils.svg)](https://www.npmjs.com/package/@wojtekmaj/color-utils) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/color-utils.svg) [![CI](https://github.com/wojtekmaj/color-utils/workflows/CI/badge.svg)](https://github.com/wojtekmaj/color-utils/actions) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
 # Color-Utils
 A collection of color-related utilities.
