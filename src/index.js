@@ -19,9 +19,7 @@ function objectToRgb(rgbObject) {
     return null;
   }
 
-  const {
-    r, g, b, a,
-  } = rgbObject;
+  const { r, g, b, a } = rgbObject;
 
   const rgb = [r, g, b].join(', ');
 
@@ -37,9 +35,7 @@ function objectToHex(rgbObject) {
     return null;
   }
 
-  const {
-    r, g, b, a,
-  } = rgbObject;
+  const { r, g, b, a } = rgbObject;
 
   const rgbHex = [r, g, b].map(numberColorToHex).join('');
 
@@ -52,11 +48,11 @@ function objectToHex(rgbObject) {
 
 function isRgbObject(rgbObject) {
   return (
-    rgbObject
-    && typeof rgbObject === 'object'
-    && 'r' in rgbObject
-    && 'g' in rgbObject
-    && 'b' in rgbObject
+    rgbObject &&
+    typeof rgbObject === 'object' &&
+    'r' in rgbObject &&
+    'g' in rgbObject &&
+    'b' in rgbObject
   );
 }
 
@@ -170,12 +166,8 @@ export function mix(color1, color2, ratio = 0.5) {
     return null;
   }
 
-  const {
-    r: r1, g: g1, b: b1, a: a1 = 1,
-  } = rgbObject1;
-  const {
-    r: r2, g: g2, b: b2, a: a2 = 1,
-  } = rgbObject2;
+  const { r: r1, g: g1, b: b1, a: a1 = 1 } = rgbObject1;
+  const { r: r2, g: g2, b: b2, a: a2 = 1 } = rgbObject2;
 
   const ratioWithAlpha = ratio * (a1 / a2);
 

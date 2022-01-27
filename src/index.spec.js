@@ -1,14 +1,4 @@
-import {
-  alpha,
-  mix,
-  mixBlack,
-  mixWhite,
-  toHex,
-  toObject,
-  toRgb,
-} from './index';
-
-/* eslint-disable object-curly-newline */
+import { alpha, mix, mixBlack, mixWhite, toHex, toObject, toRgb } from './index';
 
 describe('alpha()', () => {
   it.each`
@@ -46,11 +36,14 @@ describe('mix()', () => {
     ${'rgb(255, 0, 0)'} | ${'#fff'} | ${0.5}  | ${'#ff8080'}
     ${'rgb(255,0,0)'}   | ${'#fff'} | ${0.5}  | ${'#ff8080'}
     ${'rgb(0, 255, 0)'} | ${'#fff'} | ${0.1}  | ${'#e6ffe6'}
-  `('returns $expectedResult for $color1, $color2, $ratio', ({ color1, color2, ratio, expectedResult }) => {
-    const result = mix(color1, color2, ratio);
+  `(
+    'returns $expectedResult for $color1, $color2, $ratio',
+    ({ color1, color2, ratio, expectedResult }) => {
+      const result = mix(color1, color2, ratio);
 
-    expect(result).toEqual(expectedResult);
-  });
+      expect(result).toEqual(expectedResult);
+    },
+  );
 });
 
 describe('mixBlack()', () => {
@@ -92,21 +85,21 @@ describe('mixWhite()', () => {
 
 describe('toHex()', () => {
   it.each`
-  input                      | expectedResult
-  ${null}                   | ${null}
-  ${'potato'}               | ${null}
-  ${'#f00'}                 | ${'#ff0000'}
-  ${'#ff0000'}              | ${'#ff0000'}
-  ${'#ff000000'}            | ${'#ff000000'}
-  ${'#ff00001a'}            | ${'#ff00001a'}
-  ${'#ff0000ff'}            | ${'#ff0000ff'}
-  ${'rgb(255,0,0)'}         | ${'#ff0000'}
-  ${'rgb(255, 0, 0)'}       | ${'#ff0000'}
-  ${'rgba(255,0,0,0)'}      | ${'#ff000000'}
-  ${'rgba(255, 0, 0, 0)'}   | ${'#ff000000'}
-  ${'rgba(255,0,0,.1)'}     | ${'#ff00001a'}
-  ${'rgba(255, 0, 0, 0.1)'} | ${'#ff00001a'}
-  ${'rgba(255, 0, 0, 1)'}   | ${'#ff0000ff'}
+    input                     | expectedResult
+    ${null}                   | ${null}
+    ${'potato'}               | ${null}
+    ${'#f00'}                 | ${'#ff0000'}
+    ${'#ff0000'}              | ${'#ff0000'}
+    ${'#ff000000'}            | ${'#ff000000'}
+    ${'#ff00001a'}            | ${'#ff00001a'}
+    ${'#ff0000ff'}            | ${'#ff0000ff'}
+    ${'rgb(255,0,0)'}         | ${'#ff0000'}
+    ${'rgb(255, 0, 0)'}       | ${'#ff0000'}
+    ${'rgba(255,0,0,0)'}      | ${'#ff000000'}
+    ${'rgba(255, 0, 0, 0)'}   | ${'#ff000000'}
+    ${'rgba(255,0,0,.1)'}     | ${'#ff00001a'}
+    ${'rgba(255, 0, 0, 0.1)'} | ${'#ff00001a'}
+    ${'rgba(255, 0, 0, 1)'}   | ${'#ff0000ff'}
   `('returns $expectedResult for $input', ({ input, expectedResult }) => {
     const result = toHex(input);
 
@@ -116,21 +109,21 @@ describe('toHex()', () => {
 
 describe('toObject()', () => {
   it.each`
-    input                      | expectedResult
-     ${null}                   | ${null}
-     ${'potato'}               | ${null}
-     ${'#f00'}                 | ${{ r: 255, g: 0, b: 0 }}
-     ${'#ff0000'}              | ${{ r: 255, g: 0, b: 0 }}
-     ${'#ff000000'}            | ${{ r: 255, g: 0, b: 0, a: 0 }}
-     ${'#ff00001a'}            | ${{ r: 255, g: 0, b: 0, a: 0.1 }}
-     ${'#ff0000ff'}            | ${{ r: 255, g: 0, b: 0, a: 1 }}
-     ${'rgb(255,0,0)'}         | ${{ r: 255, g: 0, b: 0 }}
-     ${'rgb(255, 0, 0)'}       | ${{ r: 255, g: 0, b: 0 }}
-     ${'rgba(255,0,0,0)'}      | ${{ r: 255, g: 0, b: 0, a: 0 }}
-     ${'rgba(255, 0, 0, 0)'}   | ${{ r: 255, g: 0, b: 0, a: 0 }}
-     ${'rgba(255,0,0,.1)'}     | ${{ r: 255, g: 0, b: 0, a: 0.1 }}
-     ${'rgba(255, 0, 0, 0.1)'} | ${{ r: 255, g: 0, b: 0, a: 0.1 }}
-     ${'rgba(255, 0, 0, 1)'}   | ${{ r: 255, g: 0, b: 0, a: 1 }}
+    input                     | expectedResult
+    ${null}                   | ${null}
+    ${'potato'}               | ${null}
+    ${'#f00'}                 | ${{ r: 255, g: 0, b: 0 }}
+    ${'#ff0000'}              | ${{ r: 255, g: 0, b: 0 }}
+    ${'#ff000000'}            | ${{ r: 255, g: 0, b: 0, a: 0 }}
+    ${'#ff00001a'}            | ${{ r: 255, g: 0, b: 0, a: 0.1 }}
+    ${'#ff0000ff'}            | ${{ r: 255, g: 0, b: 0, a: 1 }}
+    ${'rgb(255,0,0)'}         | ${{ r: 255, g: 0, b: 0 }}
+    ${'rgb(255, 0, 0)'}       | ${{ r: 255, g: 0, b: 0 }}
+    ${'rgba(255,0,0,0)'}      | ${{ r: 255, g: 0, b: 0, a: 0 }}
+    ${'rgba(255, 0, 0, 0)'}   | ${{ r: 255, g: 0, b: 0, a: 0 }}
+    ${'rgba(255,0,0,.1)'}     | ${{ r: 255, g: 0, b: 0, a: 0.1 }}
+    ${'rgba(255, 0, 0, 0.1)'} | ${{ r: 255, g: 0, b: 0, a: 0.1 }}
+    ${'rgba(255, 0, 0, 1)'}   | ${{ r: 255, g: 0, b: 0, a: 1 }}
   `('returns $expectedResult for $input', ({ input, expectedResult }) => {
     const result = toObject(input);
 
