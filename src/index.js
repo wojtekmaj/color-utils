@@ -23,7 +23,7 @@ function objectToRgb(rgbObject) {
 
   const rgb = [r, g, b].join(', ');
 
-  if (a !== undefined) {
+  if (a !== undefined && a !== 1) {
     return `rgba(${rgb}, ${a})`;
   }
 
@@ -39,7 +39,7 @@ function objectToHex(rgbObject) {
 
   const rgbHex = [r, g, b].map(numberColorToHex).join('');
 
-  if (a !== undefined) {
+  if (a !== undefined && a !== 1) {
     return `#${rgbHex}${numberAlphaToHex(a)}`;
   }
 
@@ -85,7 +85,7 @@ function objectToHsl(rgbObject) {
   const s = Math.round(sRatio * 100);
   const l = Math.round(lRatio * 100);
 
-  if (a !== undefined) {
+  if (a !== undefined && a !== 1) {
     return `hsla(${h}, ${s}%, ${l}%, ${a})`;
   }
 
@@ -125,7 +125,7 @@ function hexToObject(rawHex) {
     b: hexColorToNumber(rawB),
   };
 
-  if (rawA !== undefined) {
+  if (rawA !== undefined && rawA !== 'ff') {
     result.a = hexAlphaToNumber(rawA);
   }
 
@@ -200,7 +200,7 @@ function hslToObject(hsl) {
     b,
   };
 
-  if (rawA !== undefined) {
+  if (rawA !== undefined && rawA !== '1') {
     result.a = Number(rawA);
   }
 
@@ -226,7 +226,7 @@ function rgbToObject(rgb) {
     b: Number(rawB),
   };
 
-  if (rawA !== undefined) {
+  if (rawA !== undefined && rawA !== '1') {
     result.a = Number(rawA);
   }
 
@@ -257,6 +257,10 @@ export function toObject(color) {
 export function alpha(color, a) {
   const rgbObject = toObject(color);
 
+  if (isNaN(a) || a === null || a === '') {
+    return null;
+  }
+
   return objectToRgb(rgbObject && { ...rgbObject, a });
 }
 
@@ -278,6 +282,14 @@ function mixChannels(channel1, channel2, ratio) {
 export function mix(color1, color2, ratio = 0.5) {
   if (!color1 || !color2) {
     return null;
+  }
+
+  if (isNaN(ratio)) {
+    return null;
+  }
+
+  if (ratio === null || ratio === '') {
+    ratio = 0.5;
   }
 
   const rgbObject1 = toObject(color1);

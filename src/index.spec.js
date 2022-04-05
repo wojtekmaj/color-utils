@@ -1,22 +1,304 @@
 import { alpha, mix, mixBlack, mixWhite, toHex, toHsl, toObject, toRgb } from './index';
 
+const colors = {
+  white: {
+    hex: '#ffffff',
+    hexAlpha: '#ffffffff',
+    hexShort: '#fff',
+    rgb: 'rgb(255, 255, 255)',
+    rgbNoSpace: 'rgb(255,255,255)',
+    rgba: 'rgba(255, 255, 255, 1)',
+    rgbaNoSpace: 'rgba(255,255,255,1)',
+    hsl: 'hsl(0, 0%, 100%)',
+    hslNoSpace: 'hsl(0,0%,100%)',
+    hsla: 'hsla(0, 0%, 100%, 1)',
+    hslaNoSpace: 'hsla(0,0%,100%,1)',
+    object: { r: 255, g: 255, b: 255 },
+  },
+  semiWhite: {
+    hex: undefined,
+    hexAlpha: '#ffffff80',
+    hexShort: undefined,
+    rgb: undefined,
+    rgbNoSpace: undefined,
+    rgba: 'rgba(255, 255, 255, 0.5)',
+    rgbaNoSpace: 'rgba(255,255,255,0.5)',
+    hsl: undefined,
+    hslNoSpace: undefined,
+    hsla: 'hsla(0, 0%, 100%, 0.5)',
+    hslaNoSpace: 'hsla(0,0%,100%,0.5)',
+    object: { r: 255, g: 255, b: 255, a: 0.5 },
+  },
+  black: {
+    hex: '#000000',
+    hexAlpha: '#000000ff',
+    hexShort: '#000',
+    rgb: 'rgb(0, 0, 0)',
+    rgbNoSpace: 'rgb(0,0,0)',
+    rgba: 'rgba(0, 0, 0, 1)',
+    rgbaNoSpace: 'rgba(0,0,0,1)',
+    hsl: 'hsl(0, 0%, 0%)',
+    hslNoSpace: 'hsl(0,0%,0%)',
+    hsla: 'hsla(0, 0%, 0%, 1)',
+    hslaNoSpace: 'hsla(0,0%,0%,1)',
+    object: { r: 0, g: 0, b: 0 },
+  },
+  gray: {
+    hex: '#808080',
+    hexAlpha: '#808080ff',
+    rgb: 'rgb(128, 128, 128)',
+    rgbNoSpace: 'rgb(128,128,128)',
+    rgba: 'rgba(128, 128, 128, 1)',
+    rgbaNoSpace: 'rgba(128,128,128,1)',
+    hsl: 'hsl(0, 0%, 50%)',
+    hslNoSpace: 'hsl(0,0%,50%)',
+    hsla: 'hsla(0, 0%, 50%, 1)',
+    hslaNoSpace: 'hsla(0,0%,50%,1)',
+    object: { r: 128, g: 128, b: 128 },
+  },
+  red: {
+    hex: '#ff0000',
+    hexAlpha: '#ff0000ff',
+    hexShort: '#f00',
+    rgb: 'rgb(255, 0, 0)',
+    rgbNoSpace: 'rgb(255,0,0)',
+    rgba: 'rgba(255, 0, 0, 1)',
+    rgbaNoSpace: 'rgba(255,0,0,1)',
+    hsl: 'hsl(0, 100%, 50%)',
+    hslNoSpace: 'hsl(0,100%,50%)',
+    hsla: 'hsla(0, 100%, 50%, 1)',
+    hslaNoSpace: 'hsla(0,100%,50%,1)',
+    object: { r: 255, g: 0, b: 0 },
+  },
+  lightRed: {
+    hex: '#ff8080',
+    hexAlpha: '#ff8080ff',
+    rgb: 'rgb(255, 128, 128)',
+    rgbNoSpace: 'rgb(255,128,128)',
+    rgba: 'rgba(255, 128, 128, 1)',
+    rgbaNoSpace: 'rgba(255,128,128,1)',
+    hsl: 'hsl(0, 100%, 75%)',
+    hslNoSpace: 'hsl(0,100%,75%)',
+    hsla: 'hsla(0, 100%, 75%, 1)',
+    hslaNoSpace: 'hsla(0,100%,75%,1)',
+    object: { r: 255, g: 128, b: 128 },
+  },
+  darkRed: {
+    hex: '#800000',
+    hexAlpha: '#800000ff',
+    hexShort: '#800',
+    rgb: 'rgb(128, 0, 0)',
+    rgbNoSpace: 'rgb(128,0,0)',
+    rgba: 'rgba(128, 0, 0, 1)',
+    rgbaNoSpace: 'rgba(128,0,0,1)',
+    hsl: 'hsl(0, 100%, 25%)',
+    hslNoSpace: 'hsl(0,100%,25%)',
+    hsla: 'hsla(0, 100%, 25%, 1)',
+    hslaNoSpace: 'hsla(0,100%,25%,1)',
+    object: { r: 128, g: 0, b: 0 },
+  },
+  semiRed: {
+    hex: undefined,
+    hexAlpha: '#ff000080',
+    hexShort: undefined,
+    rgb: undefined,
+    rgbNoSpace: undefined,
+    rgba: 'rgba(255, 0, 0, 0.5)',
+    rgbaNoSpace: 'rgba(255,0,0,0.5)',
+    hsl: undefined,
+    hslNoSpace: undefined,
+    hsla: 'hsla(0, 100%, 50%, 0.5)',
+    hslaNoSpace: 'hsla(0,100%,50%,0.5)',
+    object: { r: 255, g: 0, b: 0, a: 0.5 },
+  },
+  orange: {
+    hex: '#ff8000',
+    hexAlpha: '#ff8000ff',
+    hexShort: undefined,
+    rgb: 'rgb(255, 128, 0)',
+    rgbNoSpace: 'rgb(255,128,0)',
+    rgba: 'rgba(255, 128, 0, 1)',
+    rgbaNoSpace: 'rgba(255,128,0,1)',
+    hsl: 'hsl(30, 100%, 50%)',
+    hslNoSpace: 'hsl(30,100%,50%)',
+    hsla: 'hsla(30, 100%, 50%)',
+    hslaNoSpace: 'hsla(30,100%,50%)',
+    object: { r: 255, g: 128, b: 0 },
+  },
+  yellow: {
+    hex: '#ffff00',
+    hexAlpha: '#ffff00ff',
+    hexShort: '#ff0',
+    rgb: 'rgb(255, 255, 0)',
+    rgbNoSpace: 'rgb(255,255,0)',
+    rgba: 'rgba(255, 255, 0, 1)',
+    rgbaNoSpace: 'rgba(255,255,0,1)',
+    hsl: 'hsl(60, 100%, 50%)',
+    hslNoSpace: 'hsl(60,100%,50%)',
+    hsla: 'hsla(60, 100%, 50%)',
+    hslaNoSpace: 'hsla(60,100%,50%)',
+    object: { r: 255, g: 255, b: 0 },
+  },
+  lime: {
+    hex: '#80ff00',
+    hexAlpha: '#80ff00ff',
+    hexShort: undefined,
+    rgb: 'rgb(128, 255, 0)',
+    rgbNoSpace: 'rgb(128,255,0)',
+    rgba: 'rgba(128, 255, 0, 1)',
+    rgbaNoSpace: 'rgba(128,255,0,1)',
+    hsl: 'hsl(90, 100%, 50%)',
+    hslNoSpace: 'hsl(90,100%,50%)',
+    hsla: 'hsla(90, 100%, 50%)',
+    hslaNoSpace: 'hsla(90,100%,50%)',
+    object: { r: 128, g: 255, b: 0 },
+  },
+  green: {
+    hex: '#00ff00',
+    hexAlpha: '#00ff00ff',
+    hexShort: '#0f0',
+    rgb: 'rgb(0, 255, 0)',
+    rgbNoSpace: 'rgb(0,255,0)',
+    rgba: 'rgba(0, 255, 0, 1)',
+    rgbaNoSpace: 'rgba(0,255,0,1)',
+    hsl: 'hsl(120, 100%, 50%)',
+    hslNoSpace: 'hsl(120,100%,50%)',
+    hsla: 'hsla(120, 100%, 50%)',
+    hslaNoSpace: 'hsla(120,100%,50%)',
+    object: { r: 0, g: 255, b: 0 },
+  },
+  teal: {
+    hex: '#00ff80',
+    hexAlpha: '#00ff80ff',
+    hexShort: undefined,
+    rgb: 'rgb(0, 255, 128)',
+    rgbNoSpace: 'rgb(0,255,128)',
+    rgba: 'rgba(0, 255, 128, 1)',
+    rgbaNoSpace: 'rgba(0,255,128,1)',
+    hsl: 'hsl(150, 100%, 50%)',
+    hslNoSpace: 'hsl(150,100%,50%)',
+    hsla: 'hsla(150, 100%, 50%)',
+    hslaNoSpace: 'hsla(150,100%,50%)',
+    object: { r: 0, g: 255, b: 128 },
+  },
+  cyan: {
+    hex: '#00ffff',
+    hexAlpha: '#00ffffff',
+    hexShort: '#0ff',
+    rgb: 'rgb(0, 255, 255)',
+    rgbNoSpace: 'rgb(0,255,255)',
+    rgba: 'rgba(0, 255, 255, 1)',
+    rgbaNoSpace: 'rgba(0,255,255,1)',
+    hsl: 'hsl(180, 100%, 50%)',
+    hslNoSpace: 'hsl(180,100%,50%)',
+    hsla: 'hsla(180, 100%, 50%)',
+    hslaNoSpace: 'hsla(180,100%,50%)',
+    object: { r: 0, g: 255, b: 255 },
+  },
+  lightblue: {
+    hex: '#0080ff',
+    hexAlpha: '#0080ffff',
+    hexShort: undefined,
+    rgb: 'rgb(0, 128, 255)',
+    rgbNoSpace: 'rgb(0,128,255)',
+    rgba: 'rgba(0, 128, 255, 1)',
+    rgbaNoSpace: 'rgba(0,128,255,1)',
+    hsl: 'hsl(210, 100%, 50%)',
+    hslNoSpace: 'hsl(210,100%,50%)',
+    hsla: 'hsla(210, 100%, 50%)',
+    hslaNoSpace: 'hsla(210,100%,50%)',
+    object: { r: 0, g: 128, b: 255 },
+  },
+  blue: {
+    hex: '#0000ff',
+    hexAlpha: '#0000ffff',
+    hexShort: '#00f',
+    rgb: 'rgb(0, 0, 255)',
+    rgbNoSpace: 'rgb(0,0,255)',
+    rgba: 'rgba(0, 0, 255, 1)',
+    rgbaNoSpace: 'rgba(0,0,255,1)',
+    hsl: 'hsl(240, 100%, 50%)',
+    hslNoSpace: 'hsl(240,100%,50%)',
+    hsla: 'hsla(240, 100%, 50%)',
+    hslaNoSpace: 'hsla(240,100%,50%)',
+    object: { r: 0, g: 0, b: 255 },
+  },
+  purple: {
+    hex: '#8000ff',
+    hexAlpha: '#8000ffff',
+    hexShort: undefined,
+    rgb: 'rgb(128, 0, 255)',
+    rgbNoSpace: 'rgb(128,0,255)',
+    rgba: 'rgba(128, 0, 255, 1)',
+    rgbaNoSpace: 'rgba(128,0,255,1)',
+    hsl: 'hsl(270, 100%, 50%)',
+    hslNoSpace: 'hsl(270,100%,50%)',
+    hsla: 'hsla(270, 100%, 50%)',
+    hslaNoSpace: 'hsla(270,100%,50%)',
+    object: { r: 128, g: 0, b: 255 },
+  },
+  pink: {
+    hex: '#ff00ff',
+    hexAlpha: '#ff00ffff',
+    hexShort: '#f0f',
+    rgb: 'rgb(255, 0, 255)',
+    rgbNoSpace: 'rgb(255,0,255)',
+    rgba: 'rgba(255, 0, 255, 1)',
+    rgbaNoSpace: 'rgba(255,0,255,1)',
+    hsl: 'hsl(300, 100%, 50%)',
+    hslNoSpace: 'hsl(300,100%,50%)',
+    hsla: 'hsla(300, 100%, 50%)',
+    hslaNoSpace: 'hsla(300,100%,50%)',
+    object: { r: 255, g: 0, b: 255 },
+  },
+  magenta: {
+    hex: '#ff0080',
+    hexAlpha: '#ff0080ff',
+    hexShort: undefined,
+    rgb: 'rgb(255, 0, 128)',
+    rgbNoSpace: 'rgb(255,0,128)',
+    rgba: 'rgba(255, 0, 128, 1)',
+    rgbaNoSpace: 'rgba(255,0,128,1)',
+    hsl: 'hsl(330, 100%, 50%)',
+    hslNoSpace: 'hsl(330,100%,50%)',
+    hsla: 'hsla(330, 100%, 50%)',
+    hslaNoSpace: 'hsla(330,100%,50%)',
+    object: { r: 255, g: 0, b: 128 },
+  },
+};
+
 describe('alpha()', () => {
   it.each`
-    input                   | a      | expectedResult
-    ${null}                 | ${0}   | ${null}
-    ${'potato'}             | ${0}   | ${null}
-    ${'#f00'}               | ${0.5} | ${'rgba(255, 0, 0, 0.5)'}
-    ${'#ff0000'}            | ${0.5} | ${'rgba(255, 0, 0, 0.5)'}
-    ${'#ffffff'}            | ${0.5} | ${'rgba(255, 255, 255, 0.5)'}
-    ${'#ff000000'}          | ${0.5} | ${'rgba(255, 0, 0, 0.5)'}
-    ${'rgb(255, 0, 0)'}     | ${0.5} | ${'rgba(255, 0, 0, 0.5)'}
-    ${'rgb(255,0,0)'}       | ${0.5} | ${'rgba(255, 0, 0, 0.5)'}
-    ${'rgb(255, 255, 255)'} | ${0.5} | ${'rgba(255, 255, 255, 0.5)'}
-    ${'rgb(255,255,255)'}   | ${0.5} | ${'rgba(255, 255, 255, 0.5)'}
-    ${'rgb(0, 255, 0)'}     | ${0.1} | ${'rgba(0, 255, 0, 0.1)'}
-    ${'hsl(0, 100%, 50%)'}  | ${0.5} | ${'rgba(255, 0, 0, 0.5)'}
-    ${'hsl(0,100%,50%)'}    | ${0.5} | ${'rgba(255, 0, 0, 0.5)'}
-  `('returns $expectedResult for $input', ({ input, a, expectedResult }) => {
+    input                       | a           | expectedResult
+    ${'potato'}                 | ${0}        | ${null}
+    ${''}                       | ${0}        | ${null}
+    ${null}                     | ${0}        | ${null}
+    ${colors.white.hex}         | ${'potato'} | ${null}
+    ${colors.white.hex}         | ${''}       | ${null}
+    ${colors.white.hex}         | ${null}     | ${null}
+    ${colors.white.hex}         | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.hexAlpha}    | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.hexShort}    | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.rgb}         | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.rgbNoSpace}  | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.rgba}        | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.rgbaNoSpace} | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.hsl}         | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.hslNoSpace}  | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.hsla}        | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.white.hslaNoSpace} | ${0.5}      | ${colors.semiWhite.rgba}
+    ${colors.red.hex}           | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.hexAlpha}      | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.hexShort}      | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.rgb}           | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.rgbNoSpace}    | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.rgba}          | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.rgbaNoSpace}   | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.hsl}           | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.hslNoSpace}    | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.hsla}          | ${0.5}      | ${colors.semiRed.rgba}
+    ${colors.red.hslaNoSpace}   | ${0.5}      | ${colors.semiRed.rgba}
+  `('returns $expectedResult given $input, $a', ({ input, a, expectedResult }) => {
     const result = alpha(input, a);
 
     expect(result).toEqual(expectedResult);
@@ -25,34 +307,43 @@ describe('alpha()', () => {
 
 describe('mix()', () => {
   it.each`
-    color1                  | color2    | ratio   | expectedResult
-    ${null}                 | ${null}   | ${0.5}  | ${null}
-    ${'#fff'}               | ${null}   | ${0.5}  | ${null}
-    ${null}                 | ${'#fff'} | ${0.5}  | ${null}
-    ${'#f00'}               | ${'#000'} | ${0.5}  | ${'#800000'}
-    ${'#ff0000'}            | ${'#000'} | ${0.5}  | ${'#800000'}
-    ${'#5bc6e8'}            | ${'#000'} | ${0.16} | ${'#0f2025'}
-    ${'rgb(255, 0, 0)'}     | ${'#000'} | ${0.5}  | ${'#800000'}
-    ${'rgb(255,0,0)'}       | ${'#000'} | ${0.5}  | ${'#800000'}
-    ${'rgb(0, 255, 0)'}     | ${'#000'} | ${0.1}  | ${'#001a00'}
-    ${'hsl(0, 100%, 50%)'}  | ${'#000'} | ${0.5}  | ${'#800000'}
-    ${'hsl(0,100%,50%)'}    | ${'#000'} | ${0.5}  | ${'#800000'}
-    ${'hsl(0, 0%, 100%)'}   | ${'#000'} | ${0.5}  | ${'#808080'}
-    ${'hsl(0,0%,100%)'}     | ${'#000'} | ${0.5}  | ${'#808080'}
-    ${'#f00'}               | ${'#fff'} | ${0.5}  | ${'#ff8080'}
-    ${'#ff0000'}            | ${'#fff'} | ${0.5}  | ${'#ff8080'}
-    ${'#5bc6e8'}            | ${'#fff'} | ${0.16} | ${'#e5f6fb'}
-    ${'rgb(255, 0, 0)'}     | ${'#fff'} | ${0.5}  | ${'#ff8080'}
-    ${'rgb(255,0,0)'}       | ${'#fff'} | ${0.5}  | ${'#ff8080'}
-    ${'rgb(255, 255, 255)'} | ${'#fff'} | ${0.5}  | ${'#ffffff'}
-    ${'rgb(255,255,255)'}   | ${'#fff'} | ${0.5}  | ${'#ffffff'}
-    ${'rgb(0, 255, 0)'}     | ${'#fff'} | ${0.1}  | ${'#e6ffe6'}
-    ${'hsl(0, 100%, 50%)'}  | ${'#fff'} | ${0.5}  | ${'#ff8080'}
-    ${'hsl(0,100%,50%)'}    | ${'#fff'} | ${0.5}  | ${'#ff8080'}
-    ${'hsl(0, 0%, 100%)'}   | ${'#fff'} | ${0.5}  | ${'#ffffff'}
-    ${'hsl(0,0%,100%)'}     | ${'#fff'} | ${0.5}  | ${'#ffffff'}
+    color1                      | color2              | ratio       | expectedResult
+    ${'potato'}                 | ${'potato'}         | ${0.5}      | ${null}
+    ${''}                       | ${''}               | ${0.5}      | ${null}
+    ${null}                     | ${null}             | ${0.5}      | ${null}
+    ${colors.white.hex}         | ${'potato'}         | ${0.5}      | ${null}
+    ${colors.white.hex}         | ${''}               | ${0.5}      | ${null}
+    ${colors.white.hex}         | ${null}             | ${0.5}      | ${null}
+    ${'potato'}                 | ${colors.white.hex} | ${0.5}      | ${null}
+    ${''}                       | ${colors.white.hex} | ${0.5}      | ${null}
+    ${null}                     | ${colors.white.hex} | ${0.5}      | ${null}
+    ${colors.white.hex}         | ${colors.black.hex} | ${'potato'} | ${null}
+    ${colors.white.hex}         | ${colors.black.hex} | ${''}       | ${colors.gray.hex}
+    ${colors.white.hex}         | ${colors.black.hex} | ${null}     | ${colors.gray.hex}
+    ${colors.white.hex}         | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hexAlpha}    | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hexShort}    | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.rgb}         | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.rgbNoSpace}  | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.rgba}        | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.rgbaNoSpace} | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hsl}         | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hslNoSpace}  | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hsla}        | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hslaNoSpace} | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
+    ${colors.red.hex}           | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hexAlpha}      | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hexShort}      | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.rgb}           | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.rgbNoSpace}    | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.rgba}          | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.rgbaNoSpace}   | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hsl}           | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hslNoSpace}    | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hsla}          | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hslaNoSpace}   | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
   `(
-    'returns $expectedResult for $color1, $color2, $ratio',
+    'returns $expectedResult given $color1, $color2, $ratio',
     ({ color1, color2, ratio, expectedResult }) => {
       const result = mix(color1, color2, ratio);
 
@@ -63,22 +354,36 @@ describe('mix()', () => {
 
 describe('mixBlack()', () => {
   it.each`
-    input                   | ratio   | expectedResult
-    ${null}                 | ${0}    | ${null}
-    ${'potato'}             | ${0}    | ${null}
-    ${'#f00'}               | ${0.5}  | ${'#800000'}
-    ${'#ff0000'}            | ${0.5}  | ${'#800000'}
-    ${'#5bc6e8'}            | ${0.16} | ${'#0f2025'}
-    ${'rgb(255, 0, 0)'}     | ${0.5}  | ${'#800000'}
-    ${'rgb(255,0,0)'}       | ${0.5}  | ${'#800000'}
-    ${'rgb(255, 255, 255)'} | ${0.5}  | ${'#808080'}
-    ${'rgb(255,255,255)'}   | ${0.5}  | ${'#808080'}
-    ${'rgb(0, 255, 0)'}     | ${0.1}  | ${'#001a00'}
-    ${'hsl(0, 100%, 50%)'}  | ${0.5}  | ${'#800000'}
-    ${'hsl(0,100%,50%)'}    | ${0.5}  | ${'#800000'}
-    ${'hsl(0, 0%, 100%)'}   | ${0.5}  | ${'#808080'}
-    ${'hsl(0,0%,100%)'}     | ${0.5}  | ${'#808080'}
-  `('returns $expectedResult for $input, $ratio', ({ input, ratio, expectedResult }) => {
+    input                       | ratio       | expectedResult
+    ${'potato'}                 | ${0}        | ${null}
+    ${''}                       | ${0}        | ${null}
+    ${null}                     | ${0}        | ${null}
+    ${colors.white.hex}         | ${'potato'} | ${null}
+    ${colors.white.hex}         | ${''}       | ${colors.gray.hex}
+    ${colors.white.hex}         | ${null}     | ${colors.gray.hex}
+    ${colors.white.hex}         | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hexAlpha}    | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hexShort}    | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.rgb}         | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.rgbNoSpace}  | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.rgba}        | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.rgbaNoSpace} | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hsl}         | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hslNoSpace}  | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hsla}        | ${0.5}      | ${colors.gray.hex}
+    ${colors.white.hslaNoSpace} | ${0.5}      | ${colors.gray.hex}
+    ${colors.red.hex}           | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hexAlpha}      | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hexShort}      | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.rgb}           | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.rgbNoSpace}    | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.rgba}          | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.rgbaNoSpace}   | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hsl}           | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hslNoSpace}    | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hsla}          | ${0.5}      | ${colors.darkRed.hex}
+    ${colors.red.hslaNoSpace}   | ${0.5}      | ${colors.darkRed.hex}
+  `('returns $expectedResult given $input, $ratio', ({ input, ratio, expectedResult }) => {
     const result = mixBlack(input, ratio);
 
     expect(result).toEqual(expectedResult);
@@ -87,23 +392,36 @@ describe('mixBlack()', () => {
 
 describe('mixWhite()', () => {
   it.each`
-    input                   | ratio   | expectedResult
-    ${null}                 | ${0}    | ${null}
-    ${'potato'}             | ${0}    | ${null}
-    ${'#f00'}               | ${0.5}  | ${'#ff8080'}
-    ${'#ff0000'}            | ${0.5}  | ${'#ff8080'}
-    ${'#5bc6e8'}            | ${0.16} | ${'#e5f6fb'}
-    ${'rgb(255, 0, 0)'}     | ${0.5}  | ${'#ff8080'}
-    ${'rgb(255,0,0)'}       | ${0.5}  | ${'#ff8080'}
-    ${'rgb(255, 255, 255)'} | ${0.5}  | ${'#ffffff'}
-    ${'rgb(255,255,255)'}   | ${0.5}  | ${'#ffffff'}
-    ${'rgb(0, 255, 0)'}     | ${0.1}  | ${'#e6ffe6'}
-    ${'rgba(0, 0, 0, 0.1)'} | ${1}    | ${'#e6e6e6'}
-    ${'hsl(0, 100%, 50%)'}  | ${0.5}  | ${'#ff8080'}
-    ${'hsl(0,100%,50%)'}    | ${0.5}  | ${'#ff8080'}
-    ${'hsl(0, 0%, 100%)'}   | ${0.5}  | ${'#ffffff'}
-    ${'hsl(0,0%,100%)'}     | ${0.5}  | ${'#ffffff'}
-  `('returns $expectedResult for $input, $ratio', ({ input, ratio, expectedResult }) => {
+    input                       | ratio       | expectedResult
+    ${'potato'}                 | ${0}        | ${null}
+    ${''}                       | ${0}        | ${null}
+    ${null}                     | ${0}        | ${null}
+    ${colors.black.hex}         | ${'potato'} | ${null}
+    ${colors.black.hex}         | ${''}       | ${colors.gray.hex}
+    ${colors.black.hex}         | ${null}     | ${colors.gray.hex}
+    ${colors.black.hex}         | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.hexAlpha}    | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.hexShort}    | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.rgb}         | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.rgbNoSpace}  | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.rgba}        | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.rgbaNoSpace} | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.hsl}         | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.hslNoSpace}  | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.hsla}        | ${0.5}      | ${colors.gray.hex}
+    ${colors.black.hslaNoSpace} | ${0.5}      | ${colors.gray.hex}
+    ${colors.red.hex}           | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.hexAlpha}      | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.hexShort}      | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.rgb}           | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.rgbNoSpace}    | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.rgba}          | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.rgbaNoSpace}   | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.hsl}           | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.hslNoSpace}    | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.hsla}          | ${0.5}      | ${colors.lightRed.hex}
+    ${colors.red.hslaNoSpace}   | ${0.5}      | ${colors.lightRed.hex}
+  `('returns $expectedResult given $input, $ratio', ({ input, ratio, expectedResult }) => {
     const result = mixWhite(input, ratio);
 
     expect(result).toEqual(expectedResult);
@@ -112,33 +430,49 @@ describe('mixWhite()', () => {
 
 describe('toHex()', () => {
   it.each`
-    input                        | expectedResult
-    ${null}                      | ${null}
-    ${'potato'}                  | ${null}
-    ${'#f00'}                    | ${'#ff0000'}
-    ${'#ff0000'}                 | ${'#ff0000'}
-    ${'#ffffff'}                 | ${'#ffffff'}
-    ${'#ff000000'}               | ${'#ff000000'}
-    ${'#ff00001a'}               | ${'#ff00001a'}
-    ${'#ff0000ff'}               | ${'#ff0000ff'}
-    ${'rgb(255, 0, 0)'}          | ${'#ff0000'}
-    ${'rgb(255,0,0)'}            | ${'#ff0000'}
-    ${'rgb(255, 255, 255)'}      | ${'#ffffff'}
-    ${'rgb(255,255,255)'}        | ${'#ffffff'}
-    ${'rgba(255, 0, 0, 0)'}      | ${'#ff000000'}
-    ${'rgba(255,0,0,0)'}         | ${'#ff000000'}
-    ${'rgba(255, 0, 0, 0.1)'}    | ${'#ff00001a'}
-    ${'rgba(255,0,0,.1)'}        | ${'#ff00001a'}
-    ${'rgba(255, 0, 0, 1)'}      | ${'#ff0000ff'}
-    ${'rgba(255,0,0,1)'}         | ${'#ff0000ff'}
-    ${'hsl(0, 100%, 50%)'}       | ${'#ff0000'}
-    ${'hsl(0,100%,50%)'}         | ${'#ff0000'}
-    ${'hsl(0, 0%, 100%)'}        | ${'#ffffff'}
-    ${'hsl(0,0%,100%)'}          | ${'#ffffff'}
-    ${'hsla(0, 100%, 50%, 0)'}   | ${'#ff000000'}
-    ${'hsla(0, 100%, 50%, 0.1)'} | ${'#ff00001a'}
-    ${'hsla(0, 100%, 50%, 1)'}   | ${'#ff0000ff'}
-  `('returns $expectedResult for $input', ({ input, expectedResult }) => {
+    input                         | expectedResult
+    ${null}                       | ${null}
+    ${'potato'}                   | ${null}
+    ${''}                         | ${null}
+    ${colors.white.hex}           | ${colors.white.hex}
+    ${colors.white.hexAlpha}      | ${colors.white.hex}
+    ${colors.white.hexShort}      | ${colors.white.hex}
+    ${colors.white.rgb}           | ${colors.white.hex}
+    ${colors.white.rgbNoSpace}    | ${colors.white.hex}
+    ${colors.white.rgba}          | ${colors.white.hex}
+    ${colors.white.rgbaNoSpace}   | ${colors.white.hex}
+    ${colors.white.hsl}           | ${colors.white.hex}
+    ${colors.white.hslNoSpace}    | ${colors.white.hex}
+    ${colors.white.hsla}          | ${colors.white.hex}
+    ${colors.white.hslaNoSpace}   | ${colors.white.hex}
+    ${colors.red.hex}             | ${colors.red.hex}
+    ${colors.red.hexAlpha}        | ${colors.red.hex}
+    ${colors.red.hexShort}        | ${colors.red.hex}
+    ${colors.red.rgb}             | ${colors.red.hex}
+    ${colors.red.rgbNoSpace}      | ${colors.red.hex}
+    ${colors.red.rgba}            | ${colors.red.hex}
+    ${colors.red.rgbaNoSpace}     | ${colors.red.hex}
+    ${colors.red.hsl}             | ${colors.red.hex}
+    ${colors.red.hslNoSpace}      | ${colors.red.hex}
+    ${colors.red.hsla}            | ${colors.red.hex}
+    ${colors.red.hslaNoSpace}     | ${colors.red.hex}
+    ${colors.semiRed.hexAlpha}    | ${colors.semiRed.hexAlpha}
+    ${colors.semiRed.rgba}        | ${colors.semiRed.hexAlpha}
+    ${colors.semiRed.rgbaNoSpace} | ${colors.semiRed.hexAlpha}
+    ${colors.semiRed.hsla}        | ${colors.semiRed.hexAlpha}
+    ${colors.semiRed.hslaNoSpace} | ${colors.semiRed.hexAlpha}
+    ${colors.orange.hsl}          | ${colors.orange.hex}
+    ${colors.yellow.hsl}          | ${colors.yellow.hex}
+    ${colors.lime.hsl}            | ${colors.lime.hex}
+    ${colors.green.hsl}           | ${colors.green.hex}
+    ${colors.teal.hsl}            | ${colors.teal.hex}
+    ${colors.cyan.hsl}            | ${colors.cyan.hex}
+    ${colors.lightblue.hsl}       | ${colors.lightblue.hex}
+    ${colors.blue.hsl}            | ${colors.blue.hex}
+    ${colors.purple.hsl}          | ${colors.purple.hex}
+    ${colors.pink.hsl}            | ${colors.pink.hex}
+    ${colors.magenta.hsl}         | ${colors.magenta.hex}
+  `('returns $expectedResult given $input', ({ input, expectedResult }) => {
     const result = toHex(input);
 
     expect(result).toEqual(expectedResult);
@@ -147,51 +481,49 @@ describe('toHex()', () => {
 
 describe('toHsl()', () => {
   it.each`
-    input                     | expectedResult
-    ${null}                   | ${null}
-    ${'potato'}               | ${null}
-    ${'#f00'}                 | ${'hsl(0, 100%, 50%)'}
-    ${'#ff0000'}              | ${'hsl(0, 100%, 50%)'}
-    ${'#ff8000'}              | ${'hsl(30, 100%, 50%)'}
-    ${'#ffff00'}              | ${'hsl(60, 100%, 50%)'}
-    ${'#80ff00'}              | ${'hsl(90, 100%, 50%)'}
-    ${'#00ff00'}              | ${'hsl(120, 100%, 50%)'}
-    ${'#00ff80'}              | ${'hsl(150, 100%, 50%)'}
-    ${'#00ffff'}              | ${'hsl(180, 100%, 50%)'}
-    ${'#0080ff'}              | ${'hsl(210, 100%, 50%)'}
-    ${'#0000ff'}              | ${'hsl(240, 100%, 50%)'}
-    ${'#8000ff'}              | ${'hsl(270, 100%, 50%)'}
-    ${'#ff00ff'}              | ${'hsl(300, 100%, 50%)'}
-    ${'#ff0080'}              | ${'hsl(330, 100%, 50%)'}
-    ${'#ffffff'}              | ${'hsl(0, 0%, 100%)'}
-    ${'#ff000000'}            | ${'hsla(0, 100%, 50%, 0)'}
-    ${'#ff00001a'}            | ${'hsla(0, 100%, 50%, 0.1)'}
-    ${'#ff0000ff'}            | ${'hsla(0, 100%, 50%, 1)'}
-    ${'rgb(255, 0, 0)'}       | ${'hsl(0, 100%, 50%)'}
-    ${'rgb(255,0,0)'}         | ${'hsl(0, 100%, 50%)'}
-    ${'rgb(255, 128, 0)'}     | ${'hsl(30, 100%, 50%)'}
-    ${'rgb(255, 255, 0)'}     | ${'hsl(60, 100%, 50%)'}
-    ${'rgb(128, 255, 0)'}     | ${'hsl(90, 100%, 50%)'}
-    ${'rgb(0, 255, 0)'}       | ${'hsl(120, 100%, 50%)'}
-    ${'rgb(0, 255, 128)'}     | ${'hsl(150, 100%, 50%)'}
-    ${'rgb(0, 255, 255)'}     | ${'hsl(180, 100%, 50%)'}
-    ${'rgb(0, 128, 255)'}     | ${'hsl(210, 100%, 50%)'}
-    ${'rgb(0, 0, 255)'}       | ${'hsl(240, 100%, 50%)'}
-    ${'rgb(128, 0, 255)'}     | ${'hsl(270, 100%, 50%)'}
-    ${'rgb(255, 0, 255)'}     | ${'hsl(300, 100%, 50%)'}
-    ${'rgb(255, 0, 128)'}     | ${'hsl(330, 100%, 50%)'}
-    ${'rgb(255, 255, 255)'}   | ${'hsl(0, 0%, 100%)'}
-    ${'rgb(255,255,255)'}     | ${'hsl(0, 0%, 100%)'}
-    ${'rgba(255, 0, 0, 0)'}   | ${'hsla(0, 100%, 50%, 0)'}
-    ${'rgba(255,0,0,0)'}      | ${'hsla(0, 100%, 50%, 0)'}
-    ${'rgba(255, 0, 0, 0.1)'} | ${'hsla(0, 100%, 50%, 0.1)'}
-    ${'rgba(255,0,0,.1)'}     | ${'hsla(0, 100%, 50%, 0.1)'}
-    ${'rgba(255, 0, 0, 1)'}   | ${'hsla(0, 100%, 50%, 1)'}
-    ${'hsl(0, 100%, 50%)'}    | ${'hsl(0, 100%, 50%)'}
-    ${'hsl(0,100%,50%)'}      | ${'hsl(0, 100%, 50%)'}
-    ${'hsl(0, 0%, 100%)'}     | ${'hsl(0, 0%, 100%)'}
-    ${'hsl(0,0%,100%)'}       | ${'hsl(0, 0%, 100%)'}
-  `('returns $expectedResult for $input', ({ input, expectedResult }) => {
+    input                         | expectedResult
+    ${null}                       | ${null}
+    ${'potato'}                   | ${null}
+    ${''}                         | ${null}
+    ${colors.white.hex}           | ${colors.white.hsl}
+    ${colors.white.hexAlpha}      | ${colors.white.hsl}
+    ${colors.white.hexShort}      | ${colors.white.hsl}
+    ${colors.white.rgb}           | ${colors.white.hsl}
+    ${colors.white.rgbNoSpace}    | ${colors.white.hsl}
+    ${colors.white.rgba}          | ${colors.white.hsl}
+    ${colors.white.rgbaNoSpace}   | ${colors.white.hsl}
+    ${colors.white.hsl}           | ${colors.white.hsl}
+    ${colors.white.hslNoSpace}    | ${colors.white.hsl}
+    ${colors.white.hsla}          | ${colors.white.hsl}
+    ${colors.white.hslaNoSpace}   | ${colors.white.hsl}
+    ${colors.red.hex}             | ${colors.red.hsl}
+    ${colors.red.hexAlpha}        | ${colors.red.hsl}
+    ${colors.red.hexShort}        | ${colors.red.hsl}
+    ${colors.red.rgb}             | ${colors.red.hsl}
+    ${colors.red.rgbNoSpace}      | ${colors.red.hsl}
+    ${colors.red.rgba}            | ${colors.red.hsl}
+    ${colors.red.rgbaNoSpace}     | ${colors.red.hsl}
+    ${colors.red.hsl}             | ${colors.red.hsl}
+    ${colors.red.hslNoSpace}      | ${colors.red.hsl}
+    ${colors.red.hsla}            | ${colors.red.hsl}
+    ${colors.red.hslaNoSpace}     | ${colors.red.hsl}
+    ${colors.semiRed.hexAlpha}    | ${colors.semiRed.hsla}
+    ${colors.semiRed.rgba}        | ${colors.semiRed.hsla}
+    ${colors.semiRed.rgbaNoSpace} | ${colors.semiRed.hsla}
+    ${colors.semiRed.hsla}        | ${colors.semiRed.hsla}
+    ${colors.semiRed.hslaNoSpace} | ${colors.semiRed.hsla}
+    ${colors.orange.hex}          | ${colors.orange.hsl}
+    ${colors.yellow.hex}          | ${colors.yellow.hsl}
+    ${colors.lime.hex}            | ${colors.lime.hsl}
+    ${colors.green.hex}           | ${colors.green.hsl}
+    ${colors.teal.hex}            | ${colors.teal.hsl}
+    ${colors.cyan.hex}            | ${colors.cyan.hsl}
+    ${colors.lightblue.hex}       | ${colors.lightblue.hsl}
+    ${colors.blue.hex}            | ${colors.blue.hsl}
+    ${colors.purple.hex}          | ${colors.purple.hsl}
+    ${colors.pink.hex}            | ${colors.pink.hsl}
+    ${colors.magenta.hex}         | ${colors.magenta.hsl}
+  `('returns $expectedResult given $input', ({ input, expectedResult }) => {
     const result = toHsl(input);
 
     expect(result).toEqual(expectedResult);
@@ -200,29 +532,49 @@ describe('toHsl()', () => {
 
 describe('toObject()', () => {
   it.each`
-    input                     | expectedResult
-    ${null}                   | ${null}
-    ${'potato'}               | ${null}
-    ${'#f00'}                 | ${{ r: 255, g: 0, b: 0 }}
-    ${'#ff0000'}              | ${{ r: 255, g: 0, b: 0 }}
-    ${'#ffffff'}              | ${{ r: 255, g: 255, b: 255 }}
-    ${'#ff000000'}            | ${{ r: 255, g: 0, b: 0, a: 0 }}
-    ${'#ff00001a'}            | ${{ r: 255, g: 0, b: 0, a: 0.1 }}
-    ${'#ff0000ff'}            | ${{ r: 255, g: 0, b: 0, a: 1 }}
-    ${'rgb(255, 0, 0)'}       | ${{ r: 255, g: 0, b: 0 }}
-    ${'rgb(255,0,0)'}         | ${{ r: 255, g: 0, b: 0 }}
-    ${'rgb(255, 255, 255)'}   | ${{ r: 255, g: 255, b: 255 }}
-    ${'rgb(255,255,255)'}     | ${{ r: 255, g: 255, b: 255 }}
-    ${'rgba(255, 0, 0, 0)'}   | ${{ r: 255, g: 0, b: 0, a: 0 }}
-    ${'rgba(255,0,0,0)'}      | ${{ r: 255, g: 0, b: 0, a: 0 }}
-    ${'rgba(255, 0, 0, 0.1)'} | ${{ r: 255, g: 0, b: 0, a: 0.1 }}
-    ${'rgba(255,0,0,.1)'}     | ${{ r: 255, g: 0, b: 0, a: 0.1 }}
-    ${'rgba(255, 0, 0, 1)'}   | ${{ r: 255, g: 0, b: 0, a: 1 }}
-    ${'hsl(0, 100%, 50%)'}    | ${{ r: 255, g: 0, b: 0 }}
-    ${'hsl(0,100%,50%)'}      | ${{ r: 255, g: 0, b: 0 }}
-    ${'hsl(0, 0%, 100%)'}     | ${{ r: 255, g: 255, b: 255 }}
-    ${'hsl(0,0%,100%)'}       | ${{ r: 255, g: 255, b: 255 }}
-  `('returns $expectedResult for $input', ({ input, expectedResult }) => {
+    input                         | expectedResult
+    ${null}                       | ${null}
+    ${'potato'}                   | ${null}
+    ${''}                         | ${null}
+    ${colors.white.hex}           | ${colors.white.object}
+    ${colors.white.hexAlpha}      | ${colors.white.object}
+    ${colors.white.hexShort}      | ${colors.white.object}
+    ${colors.white.rgb}           | ${colors.white.object}
+    ${colors.white.rgbNoSpace}    | ${colors.white.object}
+    ${colors.white.rgba}          | ${colors.white.object}
+    ${colors.white.rgbaNoSpace}   | ${colors.white.object}
+    ${colors.white.hsl}           | ${colors.white.object}
+    ${colors.white.hslNoSpace}    | ${colors.white.object}
+    ${colors.white.hsla}          | ${colors.white.object}
+    ${colors.white.hslaNoSpace}   | ${colors.white.object}
+    ${colors.red.hex}             | ${colors.red.object}
+    ${colors.red.hexAlpha}        | ${colors.red.object}
+    ${colors.red.hexShort}        | ${colors.red.object}
+    ${colors.red.rgb}             | ${colors.red.object}
+    ${colors.red.rgbNoSpace}      | ${colors.red.object}
+    ${colors.red.rgba}            | ${colors.red.object}
+    ${colors.red.rgbaNoSpace}     | ${colors.red.object}
+    ${colors.red.hsl}             | ${colors.red.object}
+    ${colors.red.hslNoSpace}      | ${colors.red.object}
+    ${colors.red.hsla}            | ${colors.red.object}
+    ${colors.red.hslaNoSpace}     | ${colors.red.object}
+    ${colors.semiRed.hexAlpha}    | ${colors.semiRed.object}
+    ${colors.semiRed.rgba}        | ${colors.semiRed.object}
+    ${colors.semiRed.rgbaNoSpace} | ${colors.semiRed.object}
+    ${colors.semiRed.hsla}        | ${colors.semiRed.object}
+    ${colors.semiRed.hslaNoSpace} | ${colors.semiRed.object}
+    ${colors.orange.hsl}          | ${colors.orange.object}
+    ${colors.yellow.hsl}          | ${colors.yellow.object}
+    ${colors.lime.hsl}            | ${colors.lime.object}
+    ${colors.green.hsl}           | ${colors.green.object}
+    ${colors.teal.hsl}            | ${colors.teal.object}
+    ${colors.cyan.hsl}            | ${colors.cyan.object}
+    ${colors.lightblue.hsl}       | ${colors.lightblue.object}
+    ${colors.blue.hsl}            | ${colors.blue.object}
+    ${colors.purple.hsl}          | ${colors.purple.object}
+    ${colors.pink.hsl}            | ${colors.pink.object}
+    ${colors.magenta.hsl}         | ${colors.magenta.object}
+  `('returns $expectedResult given $input', ({ input, expectedResult }) => {
     const result = toObject(input);
 
     expect(result).toEqual(expectedResult);
@@ -231,27 +583,49 @@ describe('toObject()', () => {
 
 describe('toRgb()', () => {
   it.each`
-    input                     | expectedResult
-    ${null}                   | ${null}
-    ${'potato'}               | ${null}
-    ${'#f00'}                 | ${'rgb(255, 0, 0)'}
-    ${'#ff0000'}              | ${'rgb(255, 0, 0)'}
-    ${'#ffffff'}              | ${'rgb(255, 255, 255)'}
-    ${'#ff000000'}            | ${'rgba(255, 0, 0, 0)'}
-    ${'#ff00001a'}            | ${'rgba(255, 0, 0, 0.1)'}
-    ${'#ff0000ff'}            | ${'rgba(255, 0, 0, 1)'}
-    ${'rgb(255,0,0)'}         | ${'rgb(255, 0, 0)'}
-    ${'rgb(255, 0, 0)'}       | ${'rgb(255, 0, 0)'}
-    ${'rgba(255,0,0,0)'}      | ${'rgba(255, 0, 0, 0)'}
-    ${'rgba(255, 0, 0, 0)'}   | ${'rgba(255, 0, 0, 0)'}
-    ${'rgba(255,0,0,.1)'}     | ${'rgba(255, 0, 0, 0.1)'}
-    ${'rgba(255, 0, 0, 0.1)'} | ${'rgba(255, 0, 0, 0.1)'}
-    ${'rgba(255, 0, 0, 1)'}   | ${'rgba(255, 0, 0, 1)'}
-    ${'hsl(0, 100%, 50%)'}    | ${'rgb(255, 0, 0)'}
-    ${'hsl(0,100%,50%)'}      | ${'rgb(255, 0, 0)'}
-    ${'hsl(0, 0%, 100%)'}     | ${'rgb(255, 255, 255)'}
-    ${'hsl(0,0%,100%)'}       | ${'rgb(255, 255, 255)'}
-  `('returns $expectedResult for $input', ({ input, expectedResult }) => {
+    input                         | expectedResult
+    ${null}                       | ${null}
+    ${'potato'}                   | ${null}
+    ${''}                         | ${null}
+    ${colors.white.hex}           | ${colors.white.rgb}
+    ${colors.white.hexAlpha}      | ${colors.white.rgb}
+    ${colors.white.hexShort}      | ${colors.white.rgb}
+    ${colors.white.rgb}           | ${colors.white.rgb}
+    ${colors.white.rgbNoSpace}    | ${colors.white.rgb}
+    ${colors.white.rgba}          | ${colors.white.rgb}
+    ${colors.white.rgbaNoSpace}   | ${colors.white.rgb}
+    ${colors.white.hsl}           | ${colors.white.rgb}
+    ${colors.white.hslNoSpace}    | ${colors.white.rgb}
+    ${colors.white.hsla}          | ${colors.white.rgb}
+    ${colors.white.hslaNoSpace}   | ${colors.white.rgb}
+    ${colors.red.hex}             | ${colors.red.rgb}
+    ${colors.red.hexAlpha}        | ${colors.red.rgb}
+    ${colors.red.hexShort}        | ${colors.red.rgb}
+    ${colors.red.rgb}             | ${colors.red.rgb}
+    ${colors.red.rgbNoSpace}      | ${colors.red.rgb}
+    ${colors.red.rgba}            | ${colors.red.rgb}
+    ${colors.red.rgbaNoSpace}     | ${colors.red.rgb}
+    ${colors.red.hsl}             | ${colors.red.rgb}
+    ${colors.red.hslNoSpace}      | ${colors.red.rgb}
+    ${colors.red.hsla}            | ${colors.red.rgb}
+    ${colors.red.hslaNoSpace}     | ${colors.red.rgb}
+    ${colors.semiRed.hexAlpha}    | ${colors.semiRed.rgba}
+    ${colors.semiRed.rgba}        | ${colors.semiRed.rgba}
+    ${colors.semiRed.rgbaNoSpace} | ${colors.semiRed.rgba}
+    ${colors.semiRed.hsla}        | ${colors.semiRed.rgba}
+    ${colors.semiRed.hslaNoSpace} | ${colors.semiRed.rgba}
+    ${colors.orange.hsl}          | ${colors.orange.rgb}
+    ${colors.yellow.hsl}          | ${colors.yellow.rgb}
+    ${colors.lime.hsl}            | ${colors.lime.rgb}
+    ${colors.green.hsl}           | ${colors.green.rgb}
+    ${colors.teal.hsl}            | ${colors.teal.rgb}
+    ${colors.cyan.hsl}            | ${colors.cyan.rgb}
+    ${colors.lightblue.hsl}       | ${colors.lightblue.rgb}
+    ${colors.blue.hsl}            | ${colors.blue.rgb}
+    ${colors.purple.hsl}          | ${colors.purple.rgb}
+    ${colors.pink.hsl}            | ${colors.pink.rgb}
+    ${colors.magenta.hsl}         | ${colors.magenta.rgb}
+  `('returns $expectedResult given $input', ({ input, expectedResult }) => {
     const result = toRgb(input);
 
     expect(result).toEqual(expectedResult);
