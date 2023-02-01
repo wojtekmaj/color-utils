@@ -16,7 +16,7 @@ function numberAlphaToHex(color) {
 
 function objectToRgb(rgbObject) {
   if (!rgbObject) {
-    return null;
+    throw new Error('Missing rgbObject argument');
   }
 
   const { r, g, b, a } = rgbObject;
@@ -32,7 +32,7 @@ function objectToRgb(rgbObject) {
 
 function objectToHex(rgbObject) {
   if (!rgbObject) {
-    return null;
+    throw new Error('Missing rgbObject argument');
   }
 
   const { r, g, b, a } = rgbObject;
@@ -48,7 +48,7 @@ function objectToHex(rgbObject) {
 
 function objectToHsl(rgbObject) {
   if (!rgbObject) {
-    return null;
+    throw new Error('Missing rgbObject argument');
   }
 
   const { r, g, b, a } = rgbObject;
@@ -104,7 +104,7 @@ function isRgbObject(rgbObject) {
 
 function hexToObject(rawHex) {
   if (!rawHex) {
-    return null;
+    throw new Error('Missing hex argument');
   }
 
   // Expand shorthand form (e.g. "03f") to full form (e.g. "0033ff")
@@ -114,7 +114,9 @@ function hexToObject(rawHex) {
   const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i.exec(hex);
 
   if (!match) {
-    return null;
+    throw new Error(
+      'Invalid color provided. Expected color to match #rgb, #rgba, #rrggbb, or #rrggbbaa',
+    );
   }
 
   const [, rawR, rawG, rawB, rawA] = match;
@@ -134,13 +136,15 @@ function hexToObject(rawHex) {
 
 function hslToObject(hsl) {
   if (!hsl) {
-    return null;
+    throw new Error('Missing hsl argument');
   }
 
   const match = /^hsla?\((\d{0,3}),\s?(\d{0,3})%,\s?(\d{0,3})%(,\s?((0?\.)?\d*))?\)$/i.exec(hsl);
 
   if (!match) {
-    return null;
+    throw new Error(
+      'Invalid color provided. Expected color to match hsl(h, s, l) or hsla(h, s, l, a)',
+    );
   }
 
   const [, rawH, rawS, rawL, , rawA] = match;
@@ -209,13 +213,15 @@ function hslToObject(hsl) {
 
 function rgbToObject(rgb) {
   if (!rgb) {
-    return null;
+    throw new Error('Missing rgb argument');
   }
 
   const match = /^rgba?\((\d{0,3}),\s?(\d{0,3}),\s?(\d{0,3})(,\s?((0?\.)?\d*))?\)$/i.exec(rgb);
 
   if (!match) {
-    return null;
+    throw new Error(
+      'Invalid color provided. Expected color to match rgb(r, g, b) or rgba(r, g, b, a)',
+    );
   }
 
   const [, rawR, rawG, rawB, , rawA] = match;
@@ -244,7 +250,25 @@ export function toObject(color) {
     return color;
   }
 
-  return hexToObject(color) || rgbToObject(color) || hslToObject(color);
+  try {
+    return hexToObject(color);
+  } catch (e) {
+    // Ignore
+  }
+
+  try {
+    return rgbToObject(color);
+  } catch (e) {
+    // Ignore
+  }
+
+  try {
+    return hslToObject(color);
+  } catch (e) {
+    // Ignore
+  }
+
+  throw new Error('Invalid color provided');
 }
 
 /**
@@ -255,11 +279,19 @@ export function toObject(color) {
  * @returns {String} Color with alpha channel added/changed
  */
 export function alpha(color, a) {
-  const rgbObject = toObject(color);
-
-  if (isNaN(a) || a === null || a === '') {
-    return null;
+  if (!color) {
+    throw new Error('Missing color argument');
   }
+
+  if (a !== 0 && !a) {
+    throw new Error('Missing alpha argument');
+  }
+
+  if (isNaN(a)) {
+    throw new Error('Invalid alpha argument provided');
+  }
+
+  const rgbObject = toObject(color);
 
   return objectToRgb(rgbObject && { ...rgbObject, a });
 }
@@ -280,15 +312,19 @@ function mixChannels(channel1, channel2, ratio) {
  * @returns {String} Color in hex format
  */
 export function mix(color1, color2, ratio = 0.5) {
-  if (!color1 || !color2) {
-    return null;
+  if (!color1) {
+    throw new Error('Missing color1 argument');
+  }
+
+  if (!color2) {
+    throw new Error('Missing color2 argument');
   }
 
   if (isNaN(ratio)) {
-    return null;
+    throw new Error('Invalid ratio argument provided');
   }
 
-  if (ratio === null || ratio === '') {
+  if (ratio !== 0 && !ratio) {
     ratio = 0.5;
   }
 
@@ -296,7 +332,7 @@ export function mix(color1, color2, ratio = 0.5) {
   const rgbObject2 = toObject(color2);
 
   if (!rgbObject1 || !rgbObject2) {
-    return null;
+    throw new Error('Invalid color provided');
   }
 
   const { r: r1, g: g1, b: b1, a: a1 = 1 } = rgbObject1;
