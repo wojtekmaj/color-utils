@@ -1,20 +1,46 @@
-function hexColorToNumber(color) {
+type NumberFrom0To255 = number;
+type NumberFrom0To1 = number;
+
+type HexString = string;
+type HashHexString = `#${HexString}`;
+type RgbString = `rgb(${string})`;
+type RgbaString = `rgba(${string})`;
+type HslString = `hsl(${string})`;
+type HslaString = `hsla(${string})`;
+
+type RgbObject = {
+  r: NumberFrom0To255;
+  g: NumberFrom0To255;
+  b: NumberFrom0To255;
+  a?: NumberFrom0To1;
+};
+
+type Color =
+  | HexString
+  | HashHexString
+  | RgbString
+  | RgbaString
+  | HslString
+  | HslaString
+  | RgbObject;
+
+function hexColorToNumber(color: string): NumberFrom0To255 {
   return parseInt(color, 16);
 }
 
-function hexAlphaToNumber(color) {
+function hexAlphaToNumber(color: string): NumberFrom0To1 {
   return Math.round((hexColorToNumber(color) / 255) * 100) / 100;
 }
 
-function numberColorToHex(color) {
+function numberColorToHex(color: NumberFrom0To255): string {
   return `0${Number(color).toString(16)}`.slice(-2);
 }
 
-function numberAlphaToHex(color) {
+function numberAlphaToHex(color: NumberFrom0To1): string {
   return numberColorToHex(Math.round(Number(color) * 255));
 }
 
-function objectToRgb(rgbObject) {
+function objectToRgb(rgbObject?: RgbObject | null): RgbString | RgbaString {
   if (!rgbObject) {
     throw new Error('Missing rgbObject argument');
   }
@@ -30,7 +56,7 @@ function objectToRgb(rgbObject) {
   return `rgb(${rgb})`;
 }
 
-function objectToHex(rgbObject) {
+function objectToHex(rgbObject?: RgbObject): HashHexString {
   if (!rgbObject) {
     throw new Error('Missing rgbObject argument');
   }
@@ -46,7 +72,7 @@ function objectToHex(rgbObject) {
   return `#${rgbHex}`;
 }
 
-function objectToHsl(rgbObject) {
+function objectToHsl(rgbObject: RgbObject): HslString | HslaString {
   if (!rgbObject) {
     throw new Error('Missing rgbObject argument');
   }
@@ -77,6 +103,8 @@ function objectToHsl(rgbObject) {
     if (maxRatio === bRatio) {
       return (rRatio - gRatio) / delta + 4;
     }
+
+    return 0;
   })();
   const lRatio = (minRatio + maxRatio) / 2;
   const sRatio = delta ? delta / (1 - Math.abs(2 * lRatio - 1)) : 0;
@@ -92,24 +120,27 @@ function objectToHsl(rgbObject) {
   return `hsl(${h}, ${s}%, ${l}%)`;
 }
 
-function isRgbObject(rgbObject) {
+function isRgbObject(rgbObject?: unknown): rgbObject is RgbObject {
   return (
-    rgbObject &&
     typeof rgbObject === 'object' &&
+    rgbObject !== null &&
     'r' in rgbObject &&
     'g' in rgbObject &&
     'b' in rgbObject
   );
 }
 
-function hexToObject(rawHex) {
+function hexToObject(rawHex: HexString | HashHexString): RgbObject {
   if (!rawHex) {
     throw new Error('Missing hex argument');
   }
 
   // Expand shorthand form (e.g. "03f") to full form (e.g. "0033ff")
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  const hex = rawHex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+  const hex = rawHex.replace(
+    shorthandRegex,
+    (m: string, r: string, g: string, b: string) => r + r + g + g + b + b,
+  );
 
   const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i.exec(hex);
 
@@ -119,9 +150,15 @@ function hexToObject(rawHex) {
     );
   }
 
-  const [, rawR, rawG, rawB, rawA] = match;
+  const [, rawR, rawG, rawB, rawA] = match as unknown as [
+    string,
+    string,
+    string,
+    string,
+    string | undefined,
+  ];
 
-  const result = {
+  const result: RgbObject = {
     r: hexColorToNumber(rawR),
     g: hexColorToNumber(rawG),
     b: hexColorToNumber(rawB),
@@ -134,7 +171,7 @@ function hexToObject(rawHex) {
   return result;
 }
 
-function hslToObject(hsl) {
+function hslToObject(hsl: HslString | HslaString): RgbObject {
   if (!hsl) {
     throw new Error('Missing hsl argument');
   }
@@ -198,7 +235,7 @@ function hslToObject(hsl) {
   const g = Math.round((gRatio + lightness) * 255);
   const b = Math.round((bRatio + lightness) * 255);
 
-  const result = {
+  const result: RgbObject = {
     r,
     g,
     b,
@@ -211,7 +248,7 @@ function hslToObject(hsl) {
   return result;
 }
 
-function rgbToObject(rgb) {
+function rgbToObject(rgb: RgbString | RgbaString): RgbObject {
   if (!rgb) {
     throw new Error('Missing rgb argument');
   }
@@ -226,7 +263,7 @@ function rgbToObject(rgb) {
 
   const [, rawR, rawG, rawB, , rawA] = match;
 
-  const result = {
+  const result: RgbObject = {
     r: Number(rawR),
     g: Number(rawG),
     b: Number(rawB),
@@ -245,25 +282,25 @@ function rgbToObject(rgb) {
  * @param {string|Object} color Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
  * @returns {Object} Color as { r, g, b, a? } object
  */
-export function toObject(color) {
+export function toObject(color: Color): RgbObject {
   if (isRgbObject(color)) {
     return color;
   }
 
   try {
-    return hexToObject(color);
+    return hexToObject(color as HexString);
   } catch (e) {
     // Ignore
   }
 
   try {
-    return rgbToObject(color);
+    return rgbToObject(color as RgbString | RgbaString);
   } catch (e) {
     // Ignore
   }
 
   try {
-    return hslToObject(color);
+    return hslToObject(color as HslString | HslaString);
   } catch (e) {
     // Ignore
   }
@@ -278,7 +315,7 @@ export function toObject(color) {
  * @param {number} a Alpha (0-1)
  * @returns {String} Color with alpha channel added/changed
  */
-export function alpha(color, a) {
+export function alpha(color: Color, a?: NumberFrom0To1): RgbString | RgbaString {
   if (!color) {
     throw new Error('Missing color argument');
   }
@@ -296,7 +333,11 @@ export function alpha(color, a) {
   return objectToRgb(rgbObject && { ...rgbObject, a });
 }
 
-function mixChannels(channel1, channel2, ratio) {
+function mixChannels(
+  channel1: NumberFrom0To255,
+  channel2: NumberFrom0To255,
+  ratio: NumberFrom0To1,
+): number {
   const channelA = channel1 * ratio;
   const channelB = channel2 * (1 - ratio);
 
@@ -311,7 +352,7 @@ function mixChannels(channel1, channel2, ratio) {
  * @param {number} [ratio=0.5] Ratio at which colors should be mixed
  * @returns {String} Color in hex format
  */
-export function mix(color1, color2, ratio = 0.5) {
+export function mix(color1: Color, color2: Color, ratio: NumberFrom0To1 = 0.5): HashHexString {
   if (!color1) {
     throw new Error('Missing color1 argument');
   }
@@ -356,7 +397,7 @@ export function mix(color1, color2, ratio = 0.5) {
  * @param {number} [ratio=0.5] Ratio at which colors should be mixed
  * @returns {String} Color in hex format
  */
-export function mixWhite(color, ratio) {
+export function mixWhite(color: Color, ratio?: NumberFrom0To1): HashHexString {
   return mix(color, 'fff', ratio);
 }
 
@@ -367,7 +408,7 @@ export function mixWhite(color, ratio) {
  * @param {number} [ratio=0.5] Ratio at which colors should be mixed
  * @returns {String} Color in hex format
  */
-export function mixBlack(color, ratio) {
+export function mixBlack(color: Color, ratio?: NumberFrom0To1): HashHexString {
   return mix(color, '000', ratio);
 }
 
@@ -377,7 +418,7 @@ export function mixBlack(color, ratio) {
  * @param {string|Object} color Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
  * @returns {String} Color in hex format
  */
-export function toHex(color) {
+export function toHex(color: Color): HashHexString {
   const rgbObject = toObject(color);
 
   return objectToHex(rgbObject);
@@ -389,7 +430,7 @@ export function toHex(color) {
  * @param {string|Object} color Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
  * @returns {String} Color in hsl(…) or hsla(…) format, whichever is applicable
  */
-export function toHsl(color) {
+export function toHsl(color: Color): HslString | HslaString {
   const rgbObject = toObject(color);
 
   return objectToHsl(rgbObject);
@@ -401,7 +442,7 @@ export function toHsl(color) {
  * @param {string|Object} color Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
  * @returns {String} Color in rgb(…) or rgba(…) format, whichever is applicable
  */
-export function toRgb(color) {
+export function toRgb(color: Color): RgbString | RgbaString {
   const rgbObject = toObject(color);
 
   return objectToRgb(rgbObject);
