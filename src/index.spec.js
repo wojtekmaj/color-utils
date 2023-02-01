@@ -269,35 +269,41 @@ const colors = {
 
 describe('alpha()', () => {
   it.each`
-    input                       | a           | expectedResult
-    ${'potato'}                 | ${0}        | ${null}
-    ${''}                       | ${0}        | ${null}
-    ${null}                     | ${0}        | ${null}
-    ${colors.white.hex}         | ${'potato'} | ${null}
-    ${colors.white.hex}         | ${''}       | ${null}
-    ${colors.white.hex}         | ${null}     | ${null}
-    ${colors.white.hex}         | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.hexAlpha}    | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.hexShort}    | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.rgb}         | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.rgbNoSpace}  | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.rgba}        | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.rgbaNoSpace} | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.hsl}         | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.hslNoSpace}  | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.hsla}        | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.white.hslaNoSpace} | ${0.5}      | ${colors.semiWhite.rgba}
-    ${colors.red.hex}           | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.hexAlpha}      | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.hexShort}      | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.rgb}           | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.rgbNoSpace}    | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.rgba}          | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.rgbaNoSpace}   | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.hsl}           | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.hslNoSpace}    | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.hsla}          | ${0.5}      | ${colors.semiRed.rgba}
-    ${colors.red.hslaNoSpace}   | ${0.5}      | ${colors.semiRed.rgba}
+    input               | a
+    ${'potato'}         | ${0}
+    ${''}               | ${0}
+    ${null}             | ${0}
+    ${colors.white.hex} | ${'potato'}
+    ${colors.white.hex} | ${''}
+    ${colors.white.hex} | ${null}
+  `('should throw given $input, $a', ({ input, a }) => {
+    expect(() => alpha(input, a)).toThrow();
+  });
+
+  it.each`
+    input                       | a      | expectedResult
+    ${colors.white.hex}         | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.hexAlpha}    | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.hexShort}    | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.rgb}         | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.rgbNoSpace}  | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.rgba}        | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.rgbaNoSpace} | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.hsl}         | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.hslNoSpace}  | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.hsla}        | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.white.hslaNoSpace} | ${0.5} | ${colors.semiWhite.rgba}
+    ${colors.red.hex}           | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.hexAlpha}      | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.hexShort}      | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.rgb}           | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.rgbNoSpace}    | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.rgba}          | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.rgbaNoSpace}   | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.hsl}           | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.hslNoSpace}    | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.hsla}          | ${0.5} | ${colors.semiRed.rgba}
+    ${colors.red.hslaNoSpace}   | ${0.5} | ${colors.semiRed.rgba}
   `('returns $expectedResult given $input, $a', ({ input, a, expectedResult }) => {
     const result = alpha(input, a);
 
@@ -307,41 +313,47 @@ describe('alpha()', () => {
 
 describe('mix()', () => {
   it.each`
-    color1                      | color2              | ratio       | expectedResult
-    ${'potato'}                 | ${'potato'}         | ${0.5}      | ${null}
-    ${''}                       | ${''}               | ${0.5}      | ${null}
-    ${null}                     | ${null}             | ${0.5}      | ${null}
-    ${colors.white.hex}         | ${'potato'}         | ${0.5}      | ${null}
-    ${colors.white.hex}         | ${''}               | ${0.5}      | ${null}
-    ${colors.white.hex}         | ${null}             | ${0.5}      | ${null}
-    ${'potato'}                 | ${colors.white.hex} | ${0.5}      | ${null}
-    ${''}                       | ${colors.white.hex} | ${0.5}      | ${null}
-    ${null}                     | ${colors.white.hex} | ${0.5}      | ${null}
-    ${colors.white.hex}         | ${colors.black.hex} | ${'potato'} | ${null}
-    ${colors.white.hex}         | ${colors.black.hex} | ${''}       | ${colors.gray.hex}
-    ${colors.white.hex}         | ${colors.black.hex} | ${null}     | ${colors.gray.hex}
-    ${colors.white.hex}         | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hexAlpha}    | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hexShort}    | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.rgb}         | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.rgbNoSpace}  | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.rgba}        | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.rgbaNoSpace} | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hsl}         | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hslNoSpace}  | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hsla}        | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hslaNoSpace} | ${colors.black.hex} | ${0.5}      | ${colors.gray.hex}
-    ${colors.red.hex}           | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hexAlpha}      | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hexShort}      | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.rgb}           | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.rgbNoSpace}    | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.rgba}          | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.rgbaNoSpace}   | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hsl}           | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hslNoSpace}    | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hsla}          | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hslaNoSpace}   | ${colors.black.hex} | ${0.5}      | ${colors.darkRed.hex}
+    color1              | color2              | ratio
+    ${'potato'}         | ${'potato'}         | ${0.5}
+    ${''}               | ${''}               | ${0.5}
+    ${null}             | ${null}             | ${0.5}
+    ${colors.white.hex} | ${'potato'}         | ${0.5}
+    ${colors.white.hex} | ${''}               | ${0.5}
+    ${colors.white.hex} | ${null}             | ${0.5}
+    ${'potato'}         | ${colors.white.hex} | ${0.5}
+    ${''}               | ${colors.white.hex} | ${0.5}
+    ${null}             | ${colors.white.hex} | ${0.5}
+    ${colors.white.hex} | ${colors.black.hex} | ${'potato'}
+  `('should throw given $color1, $color2, $ratio', ({ color1, color2, ratio }) => {
+    expect(() => mix(color1, color2, ratio)).toThrow();
+  });
+
+  it.each`
+    color1                      | color2              | ratio   | expectedResult
+    ${colors.white.hex}         | ${colors.black.hex} | ${''}   | ${colors.gray.hex}
+    ${colors.white.hex}         | ${colors.black.hex} | ${null} | ${colors.gray.hex}
+    ${colors.white.hex}         | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hexAlpha}    | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hexShort}    | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgb}         | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgbNoSpace}  | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgba}        | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgbaNoSpace} | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hsl}         | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hslNoSpace}  | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hsla}        | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hslaNoSpace} | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.red.hex}           | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hexAlpha}      | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hexShort}      | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgb}           | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgbNoSpace}    | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgba}          | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgbaNoSpace}   | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hsl}           | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hslNoSpace}    | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hsla}          | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hslaNoSpace}   | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
   `(
     'returns $expectedResult given $color1, $color2, $ratio',
     ({ color1, color2, ratio, expectedResult }) => {
@@ -354,35 +366,41 @@ describe('mix()', () => {
 
 describe('mixBlack()', () => {
   it.each`
-    input                       | ratio       | expectedResult
-    ${'potato'}                 | ${0}        | ${null}
-    ${''}                       | ${0}        | ${null}
-    ${null}                     | ${0}        | ${null}
-    ${colors.white.hex}         | ${'potato'} | ${null}
-    ${colors.white.hex}         | ${''}       | ${colors.gray.hex}
-    ${colors.white.hex}         | ${null}     | ${colors.gray.hex}
-    ${colors.white.hex}         | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hexAlpha}    | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hexShort}    | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.rgb}         | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.rgbNoSpace}  | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.rgba}        | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.rgbaNoSpace} | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hsl}         | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hslNoSpace}  | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hsla}        | ${0.5}      | ${colors.gray.hex}
-    ${colors.white.hslaNoSpace} | ${0.5}      | ${colors.gray.hex}
-    ${colors.red.hex}           | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hexAlpha}      | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hexShort}      | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.rgb}           | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.rgbNoSpace}    | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.rgba}          | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.rgbaNoSpace}   | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hsl}           | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hslNoSpace}    | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hsla}          | ${0.5}      | ${colors.darkRed.hex}
-    ${colors.red.hslaNoSpace}   | ${0.5}      | ${colors.darkRed.hex}
+    input               | ratio
+    ${'potato'}         | ${0}
+    ${''}               | ${0}
+    ${null}             | ${0}
+    ${colors.white.hex} | ${'potato'}
+  `('should throw given $input, $ratio', ({ input, ratio }) => {
+    expect(() => mixBlack(input, ratio)).toThrow();
+  });
+
+  it.each`
+    input                       | ratio   | expectedResult
+    ${colors.white.hex}         | ${''}   | ${colors.gray.hex}
+    ${colors.white.hex}         | ${null} | ${colors.gray.hex}
+    ${colors.white.hex}         | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hexAlpha}    | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hexShort}    | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgb}         | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgbNoSpace}  | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgba}        | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgbaNoSpace} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hsl}         | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hslNoSpace}  | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hsla}        | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hslaNoSpace} | ${0.5}  | ${colors.gray.hex}
+    ${colors.red.hex}           | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hexAlpha}      | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hexShort}      | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgb}           | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgbNoSpace}    | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgba}          | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgbaNoSpace}   | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hsl}           | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hslNoSpace}    | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hsla}          | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hslaNoSpace}   | ${0.5}  | ${colors.darkRed.hex}
   `('returns $expectedResult given $input, $ratio', ({ input, ratio, expectedResult }) => {
     const result = mixBlack(input, ratio);
 
@@ -392,35 +410,41 @@ describe('mixBlack()', () => {
 
 describe('mixWhite()', () => {
   it.each`
-    input                       | ratio       | expectedResult
-    ${'potato'}                 | ${0}        | ${null}
-    ${''}                       | ${0}        | ${null}
-    ${null}                     | ${0}        | ${null}
-    ${colors.black.hex}         | ${'potato'} | ${null}
-    ${colors.black.hex}         | ${''}       | ${colors.gray.hex}
-    ${colors.black.hex}         | ${null}     | ${colors.gray.hex}
-    ${colors.black.hex}         | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.hexAlpha}    | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.hexShort}    | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.rgb}         | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.rgbNoSpace}  | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.rgba}        | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.rgbaNoSpace} | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.hsl}         | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.hslNoSpace}  | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.hsla}        | ${0.5}      | ${colors.gray.hex}
-    ${colors.black.hslaNoSpace} | ${0.5}      | ${colors.gray.hex}
-    ${colors.red.hex}           | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.hexAlpha}      | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.hexShort}      | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.rgb}           | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.rgbNoSpace}    | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.rgba}          | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.rgbaNoSpace}   | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.hsl}           | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.hslNoSpace}    | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.hsla}          | ${0.5}      | ${colors.lightRed.hex}
-    ${colors.red.hslaNoSpace}   | ${0.5}      | ${colors.lightRed.hex}
+    input               | ratio
+    ${'potato'}         | ${0}
+    ${''}               | ${0}
+    ${null}             | ${0}
+    ${colors.black.hex} | ${'potato'}
+  `('should throw given $input, $ratio', ({ input, ratio }) => {
+    expect(() => mixWhite(input, ratio)).toThrow();
+  });
+
+  it.each`
+    input                       | ratio   | expectedResult
+    ${colors.black.hex}         | ${''}   | ${colors.gray.hex}
+    ${colors.black.hex}         | ${null} | ${colors.gray.hex}
+    ${colors.black.hex}         | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.hexAlpha}    | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.hexShort}    | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.rgb}         | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.rgbNoSpace}  | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.rgba}        | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.rgbaNoSpace} | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.hsl}         | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.hslNoSpace}  | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.hsla}        | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.hslaNoSpace} | ${0.5}  | ${colors.gray.hex}
+    ${colors.red.hex}           | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.hexAlpha}      | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.hexShort}      | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.rgb}           | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.rgbNoSpace}    | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.rgba}          | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.rgbaNoSpace}   | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.hsl}           | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.hslNoSpace}    | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.hsla}          | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.hslaNoSpace}   | ${0.5}  | ${colors.lightRed.hex}
   `('returns $expectedResult given $input, $ratio', ({ input, ratio, expectedResult }) => {
     const result = mixWhite(input, ratio);
 
@@ -430,10 +454,16 @@ describe('mixWhite()', () => {
 
 describe('toHex()', () => {
   it.each`
+    input
+    ${null}
+    ${'potato'}
+    ${''}
+  `('should throw given $input', ({ input }) => {
+    expect(() => toHex(input)).toThrow();
+  });
+
+  it.each`
     input                         | expectedResult
-    ${null}                       | ${null}
-    ${'potato'}                   | ${null}
-    ${''}                         | ${null}
     ${colors.white.hex}           | ${colors.white.hex}
     ${colors.white.hexAlpha}      | ${colors.white.hex}
     ${colors.white.hexShort}      | ${colors.white.hex}
@@ -481,10 +511,16 @@ describe('toHex()', () => {
 
 describe('toHsl()', () => {
   it.each`
+    input
+    ${null}
+    ${'potato'}
+    ${''}
+  `('should throw given $input', ({ input }) => {
+    expect(() => toHsl(input)).toThrow();
+  });
+
+  it.each`
     input                         | expectedResult
-    ${null}                       | ${null}
-    ${'potato'}                   | ${null}
-    ${''}                         | ${null}
     ${colors.white.hex}           | ${colors.white.hsl}
     ${colors.white.hexAlpha}      | ${colors.white.hsl}
     ${colors.white.hexShort}      | ${colors.white.hsl}
@@ -532,10 +568,16 @@ describe('toHsl()', () => {
 
 describe('toObject()', () => {
   it.each`
+    input
+    ${null}
+    ${'potato'}
+    ${''}
+  `('should throw given $input', ({ input }) => {
+    expect(() => toObject(input)).toThrow();
+  });
+
+  it.each`
     input                         | expectedResult
-    ${null}                       | ${null}
-    ${'potato'}                   | ${null}
-    ${''}                         | ${null}
     ${colors.white.hex}           | ${colors.white.object}
     ${colors.white.hexAlpha}      | ${colors.white.object}
     ${colors.white.hexShort}      | ${colors.white.object}
@@ -583,10 +625,16 @@ describe('toObject()', () => {
 
 describe('toRgb()', () => {
   it.each`
+    input
+    ${null}
+    ${'potato'}
+    ${''}
+  `('should throw given $input', ({ input }) => {
+    expect(() => toRgb(input)).toThrow();
+  });
+
+  it.each`
     input                         | expectedResult
-    ${null}                       | ${null}
-    ${'potato'}                   | ${null}
-    ${''}                         | ${null}
     ${colors.white.hex}           | ${colors.white.rgb}
     ${colors.white.hexAlpha}      | ${colors.white.rgb}
     ${colors.white.hexShort}      | ${colors.white.rgb}
