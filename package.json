@@ -1,6 +1,6 @@
 {
   "name": "@wojtekmaj/color-utils",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "A collection of color-related utilities.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
