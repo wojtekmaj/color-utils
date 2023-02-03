@@ -4,7 +4,7 @@ import type { Color, HslaString, HslString, RgbObject } from './types';
 
 function objectToHsl(rgbObject: RgbObject): HslString | HslaString {
   if (!rgbObject) {
-    throw new Error('Missing rgbObject argument');
+    throw new Error('rgbObject is required');
   }
 
   const { r, g, b, a } = rgbObject;

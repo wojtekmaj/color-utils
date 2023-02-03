@@ -12,11 +12,11 @@ import type { Color, NumberFrom0To1, RgbaString, RgbString } from './types';
  */
 export default function alpha(color: Color, a?: NumberFrom0To1): RgbString | RgbaString {
   if (!color) {
-    throw new Error('Missing color argument');
+    throw new Error('Color is required');
   }
 
   if (a !== 0 && !a) {
-    throw new Error('Missing alpha argument');
+    throw new Error('Alpha is required');
   }
 
   if (isNaN(a)) {

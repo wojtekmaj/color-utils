@@ -31,7 +31,7 @@ function hexAlphaToNumber(color: string): NumberFrom0To1 {
 
 function hexToObject(rawHex: HexString | HashHexString): RgbObject {
   if (!rawHex) {
-    throw new Error('Missing hex argument');
+    throw new Error('hex is required');
   }
 
   // Expand shorthand form (e.g. "03f") to full form (e.g. "0033ff")
@@ -72,7 +72,7 @@ function hexToObject(rawHex: HexString | HashHexString): RgbObject {
 
 function hslToObject(hsl: HslString | HslaString): RgbObject {
   if (!hsl) {
-    throw new Error('Missing hsl argument');
+    throw new Error('hsl is required');
   }
 
   const match = /^hsla?\((\d{0,3}),\s?(\d{0,3})%,\s?(\d{0,3})%(,\s?((0?\.)?\d*))?\)$/i.exec(hsl);
@@ -149,7 +149,7 @@ function hslToObject(hsl: HslString | HslaString): RgbObject {
 
 function rgbToObject(rgb: RgbString | RgbaString): RgbObject {
   if (!rgb) {
-    throw new Error('Missing rgb argument');
+    throw new Error('rgb is required');
   }
 
   const match = /^rgba?\((\d{0,3}),\s?(\d{0,3}),\s?(\d{0,3})(,\s?((0?\.)?\d*))?\)$/i.exec(rgb);

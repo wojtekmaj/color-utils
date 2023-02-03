@@ -28,15 +28,15 @@ export default function mix(
   ratio: NumberFrom0To1 = 0.5,
 ): HashHexString {
   if (!color1) {
-    throw new Error('Missing color1 argument');
+    throw new Error('color1 is required');
   }
 
   if (!color2) {
-    throw new Error('Missing color2 argument');
+    throw new Error('color2 is required');
   }
 
   if (isNaN(ratio)) {
-    throw new Error('Invalid ratio argument provided');
+    throw new Error('Invalid ratio');
   }
 
   if (ratio !== 0 && !ratio) {

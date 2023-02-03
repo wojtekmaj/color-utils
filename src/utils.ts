@@ -17,7 +17,7 @@ function numberAlphaToHex(color: NumberFrom0To1): string {
 
 export function objectToHex(rgbObject?: RgbObject): HashHexString {
   if (!rgbObject) {
-    throw new Error('Missing rgbObject argument');
+    throw new Error('rgbObject is required');
   }
 
   const { r, g, b, a } = rgbObject;
@@ -33,7 +33,7 @@ export function objectToHex(rgbObject?: RgbObject): HashHexString {
 
 export function objectToRgb(rgbObject?: RgbObject | null): RgbString | RgbaString {
   if (!rgbObject) {
-    throw new Error('Missing rgbObject argument');
+    throw new Error('rgbObject is required');
   }
 
   const { r, g, b, a } = rgbObject;
