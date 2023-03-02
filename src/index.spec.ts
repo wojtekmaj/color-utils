@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { alpha, mix, mixBlack, mixWhite, toHex, toHsl, toObject, toRgb } from './index';
 
 describe('index', () => {

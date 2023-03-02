@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import toHex from './toHex';
 
 import { colors } from '../test_data';
