@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import toObject from './toObject';
 
 import { colors } from '../test_data';
