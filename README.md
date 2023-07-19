@@ -9,7 +9,7 @@ A collection of color-related utilities.
 - Install by executing `npm install @wojtekmaj/color-utils` or `yarn add @wojtekmaj/color-utils`.
 - Import by adding `import * as colorUtils from '@wojtekmaj/color-utils'`.
 - Do stuff with it!
-  ```js
+  ```ts
   toRgb('#ff0000'); // "rgb(255, 0, 0)"
   ```
 
@@ -21,7 +21,7 @@ Adds/changes alpha channel in a given color.
 
 #### Sample usage
 
-```js
+```ts
 import { alpha } from '@wojtekmaj/color-utils';
 
 alpha('#f00', 0.5); // "rgba(255, 0, 0, 0.5)"
@@ -39,7 +39,7 @@ Mixes colors together. If ratio is not given, colors are blended evenly (ratio =
 
 #### Sample usage
 
-```js
+```ts
 import { mix } from '@wojtekmaj/color-utils';
 
 mix('#ff0000', '#000', 0.5); // "#800000"
@@ -53,7 +53,7 @@ Mixes color with black.
 
 #### Sample usage
 
-```js
+```ts
 import { mixBlack } from '@wojtekmaj/color-utils';
 
 mixBlack('#ff0000', 0.5); // "#800000"
@@ -67,7 +67,7 @@ Mixes color with white.
 
 #### Sample usage
 
-```js
+```ts
 import { mixWhite } from '@wojtekmaj/color-utils';
 
 mixWhite('#ff0000', 0.5); // "#ff8080"
@@ -81,7 +81,7 @@ Converts color to hex format.
 
 #### Sample usage
 
-```js
+```ts
 import { toHex } from '@wojtekmaj/color-utils';
 
 toHex('rgb(255, 0, 0)'); // "#ff0000"
@@ -97,7 +97,7 @@ Converts color to hsl(…) or hsla(…) format, whichever is applicable.
 
 #### Sample usage
 
-```js
+```ts
 import { toHsl } from '@wojtekmaj/color-utils';
 
 toHsl('#f00'); // "hsl(0, 100%, 50%)"
@@ -113,7 +113,7 @@ Converts color to { r, g, b, a? } object.
 
 #### Sample usage
 
-```js
+```ts
 import { toObject } from '@wojtekmaj/color-utils';
 
 toObject('#f00'); // { r: 255, g: 0, b: 0 }
@@ -132,7 +132,7 @@ Converts color to rgb(…) or rgba(…) format, whichever is applicable.
 
 #### Sample usage
 
-```js
+```ts
 import { toRgb } from '@wojtekmaj/color-utils';
 
 toRgb('#f00'); // "rgb(255, 0, 0)"
