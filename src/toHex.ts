@@ -1,7 +1,7 @@
-import toObject from './toObject';
-import { objectToHex } from './utils';
+import toObject from './toObject.js';
+import { objectToHex } from './utils.js';
 
-import type { Color, HashHexString } from './types';
+import type { Color, HashHexString } from './types.js';
 
 /**
  * Converts color to hex format.

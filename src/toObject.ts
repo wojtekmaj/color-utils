@@ -9,7 +9,7 @@ import type {
   RgbaString,
   RgbObject,
   RgbString,
-} from './types';
+} from './types.js';
 
 function isRgbObject(rgbObject?: unknown): rgbObject is RgbObject {
   return (

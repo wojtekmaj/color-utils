@@ -1,7 +1,7 @@
-import toObject from './toObject';
-import { objectToHex } from './utils';
+import toObject from './toObject.js';
+import { objectToHex } from './utils.js';
 
-import type { Color, HashHexString, NumberFrom0To1, NumberFrom0To255 } from './types';
+import type { Color, HashHexString, NumberFrom0To1, NumberFrom0To255 } from './types.js';
 
 function mixChannels(
   channel1: NumberFrom0To255,

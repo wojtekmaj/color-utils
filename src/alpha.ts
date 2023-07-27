@@ -1,7 +1,7 @@
-import toObject from './toObject';
-import { objectToRgb } from './utils';
+import toObject from './toObject.js';
+import { objectToRgb } from './utils.js';
 
-import type { Color, NumberFrom0To1, RgbaString, RgbString } from './types';
+import type { Color, NumberFrom0To1, RgbaString, RgbString } from './types.js';
 
 /**
  * Adds/changes alpha channel in a given color.

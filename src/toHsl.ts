@@ -1,6 +1,6 @@
-import toObject from './toObject';
+import toObject from './toObject.js';
 
-import type { Color, HslaString, HslString, RgbObject } from './types';
+import type { Color, HslaString, HslString, RgbObject } from './types.js';
 
 function objectToHsl(rgbObject: RgbObject): HslString | HslaString {
   if (!rgbObject) {

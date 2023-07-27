@@ -1,7 +1,7 @@
-import toObject from './toObject';
-import { objectToRgb } from './utils';
+import toObject from './toObject.js';
+import { objectToRgb } from './utils.js';
 
-import type { Color, RgbaString, RgbString } from './types';
+import type { Color, RgbaString, RgbString } from './types.js';
 
 /**
  * Converts color to rgb(…) or rgba(…) format, whichever is applicable.
