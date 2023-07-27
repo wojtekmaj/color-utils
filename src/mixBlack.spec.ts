@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import mixBlack from './mixBlack';
+import mixBlack from './mixBlack.js';
 
-import { colors } from '../test_data';
+import { colors } from '../test_data.js';
 
 describe('mixBlack()', () => {
   it.each`

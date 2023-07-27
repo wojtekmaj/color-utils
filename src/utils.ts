@@ -5,7 +5,7 @@ import type {
   RgbaString,
   RgbObject,
   RgbString,
-} from './types';
+} from './types.js';
 
 function numberColorToHex(color: NumberFrom0To255): string {
   return `0${Number(color).toString(16)}`.slice(-2);

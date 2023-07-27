@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import toHex from './toHex';
+import toHex from './toHex.js';
 
-import { colors } from '../test_data';
+import { colors } from '../test_data.js';
 
 describe('toHex()', () => {
   it.each`

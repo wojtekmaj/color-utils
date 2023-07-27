@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { alpha, mix, mixBlack, mixWhite, toHex, toHsl, toObject, toRgb } from './index';
+import { alpha, mix, mixBlack, mixWhite, toHex, toHsl, toObject, toRgb } from './index.js';
 
 describe('index', () => {
   it('has alpha exported properly', () => {

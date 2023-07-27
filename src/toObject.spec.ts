@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import toObject from './toObject';
+import toObject from './toObject.js';
 
-import { colors } from '../test_data';
+import { colors } from '../test_data.js';
 
 describe('toObject()', () => {
   it.each`

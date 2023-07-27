@@ -1,6 +1,6 @@
-import mix from './mix';
+import mix from './mix.js';
 
-import type { Color, HashHexString, NumberFrom0To1 } from './types';
+import type { Color, HashHexString, NumberFrom0To1 } from './types.js';
 
 /**
  * Mixes color with black.
