@@ -99,8 +99,6 @@ function hslToObject(hsl: HslString | HslaString): RgbObject {
     rawA,
   ] = match;
 
-  console.log(match);
-
   const h60 = Number(rawH) / 60;
   const lRatio = Number(rawL) / 100;
   const sRatio = Number(rawS) / 100;
