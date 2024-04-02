@@ -17,10 +17,10 @@ function mixChannels(
 /**
  * Mixes two colors together.
  *
- * @param {string|Object} color1 Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
- * @param {string|Object} color2 Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
- * @param {number} [ratio=0.5] Ratio at which colors should be mixed
- * @returns {String} Color in hex format
+ * @param {Color} color1 Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
+ * @param {Color} color2 Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
+ * @param {NumberFrom0To1} [ratio=0.5] Ratio at which colors should be mixed
+ * @returns {HashHexString} Color in hex format
  */
 export default function mix(
   color1: Color,

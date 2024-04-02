@@ -178,8 +178,8 @@ function rgbToObject(rgb: RgbString | RgbaString): RgbObject {
 /**
  * Converts color to { r, g, b, a? } object.
  *
- * @param {string|Object} color Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
- * @returns {Object} Color as { r, g, b, a? } object
+ * @param {Color} color Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
+ * @returns {RgbObject} Color as { r, g, b, a? } object
  */
 export default function toObject(color: Color): RgbObject {
   if (isRgbObject(color)) {

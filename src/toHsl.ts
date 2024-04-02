@@ -53,8 +53,8 @@ function objectToHsl(rgbObject: RgbObject): HslString | HslaString {
 /**
  * Converts color to hsl(…) or hsla(…) format, whichever is applicable.
  *
- * @param {string|Object} color Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
- * @returns {String} Color in hsl(…) or hsla(…) format, whichever is applicable
+ * @param {Color} color Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
+ * @returns {HslString | HslaString} Color in hsl(…) or hsla(…) format, whichever is applicable
  */
 export default function toHsl(color: Color): HslString | HslaString {
   const rgbObject = toObject(color);
