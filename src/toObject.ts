@@ -75,15 +75,31 @@ function hslToObject(hsl: HslString | HslaString): RgbObject {
     throw new Error('hsl is required');
   }
 
-  const match = /^hsla?\((\d{0,3}),\s?(\d{0,3})%,\s?(\d{0,3})%(,\s?((0?\.)?\d*))?\)$/i.exec(hsl);
+  const match =
+    /^hsla?\((\d{0,3})(,\s?|\s{1,})(\d{0,3})%(,\s?|\s{1,})(\d{0,3})%((,\s?|\s?\/\s?)((0?\.)?\d*))?\)$/i.exec(
+      hsl,
+    );
 
   if (!match) {
     throw new Error(
-      'Invalid color provided. Expected color to match hsl(h, s, l) or hsla(h, s, l, a)',
+      'Invalid color provided. Expected color to match hsl(h s l), hsl(h s l / a), hsl(h, s, l) or hsla(h, s, l, a)',
     );
   }
 
-  const [, rawH, rawS, rawL, , rawA] = match;
+  // prettier-ignore
+  const [
+    /* full match */,
+    rawH,
+    /* space after H */,
+    rawS,
+    /* space after S */,
+    rawL,
+    /* full match of A */,
+    /* space before A */,
+    rawA,
+  ] = match;
+
+  console.log(match);
 
   const h60 = Number(rawH) / 60;
   const lRatio = Number(rawL) / 100;
@@ -152,15 +168,29 @@ function rgbToObject(rgb: RgbString | RgbaString): RgbObject {
     throw new Error('rgb is required');
   }
 
-  const match = /^rgba?\((\d{0,3}),\s?(\d{0,3}),\s?(\d{0,3})(,\s?((0?\.)?\d*))?\)$/i.exec(rgb);
+  const match =
+    /^rgba?\((\d{0,3})(,\s?|\s{1,})(\d{0,3})(,\s?|\s{1,})(\d{0,3})((,\s?|\s?\/\s?)((0?\.)?\d*))?\)$/i.exec(
+      rgb,
+    );
 
   if (!match) {
     throw new Error(
-      'Invalid color provided. Expected color to match rgb(r, g, b) or rgba(r, g, b, a)',
+      'Invalid color provided. Expected color to match rgb(r g b), rgb(r g b / a), rgb(r, g, b) or rgba(r, g, b, a)',
     );
   }
 
-  const [, rawR, rawG, rawB, , rawA] = match;
+  // prettier-ignore
+  const [
+    /* full match */,
+    rawR,
+    /* space after R */,
+    rawG,
+    /* space after G */,
+    rawB,
+    /* full match of A */,
+    /* space before A */,
+    rawA,
+  ] = match;
 
   const result: RgbObject = {
     r: Number(rawR),

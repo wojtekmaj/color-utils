@@ -20,28 +20,38 @@ describe('toHex()', () => {
     ${colors.white.hexShort}      | ${colors.white.hex}
     ${colors.white.rgb}           | ${colors.white.hex}
     ${colors.white.rgbNoSpace}    | ${colors.white.hex}
+    ${colors.white.rgbModern}     | ${colors.white.hex}
     ${colors.white.rgba}          | ${colors.white.hex}
     ${colors.white.rgbaNoSpace}   | ${colors.white.hex}
+    ${colors.white.rgbaModern}    | ${colors.white.hex}
     ${colors.white.hsl}           | ${colors.white.hex}
     ${colors.white.hslNoSpace}    | ${colors.white.hex}
+    ${colors.white.hslModern}     | ${colors.white.hex}
     ${colors.white.hsla}          | ${colors.white.hex}
     ${colors.white.hslaNoSpace}   | ${colors.white.hex}
+    ${colors.white.hslaModern}    | ${colors.white.hex}
     ${colors.red.hex}             | ${colors.red.hex}
     ${colors.red.hexAlpha}        | ${colors.red.hex}
     ${colors.red.hexShort}        | ${colors.red.hex}
     ${colors.red.rgb}             | ${colors.red.hex}
     ${colors.red.rgbNoSpace}      | ${colors.red.hex}
+    ${colors.red.rgbModern}       | ${colors.red.hex}
     ${colors.red.rgba}            | ${colors.red.hex}
     ${colors.red.rgbaNoSpace}     | ${colors.red.hex}
+    ${colors.red.rgbaModern}      | ${colors.red.hex}
     ${colors.red.hsl}             | ${colors.red.hex}
     ${colors.red.hslNoSpace}      | ${colors.red.hex}
+    ${colors.red.hslModern}       | ${colors.red.hex}
     ${colors.red.hsla}            | ${colors.red.hex}
     ${colors.red.hslaNoSpace}     | ${colors.red.hex}
+    ${colors.red.hslaModern}      | ${colors.red.hex}
     ${colors.semiRed.hexAlpha}    | ${colors.semiRed.hexAlpha}
     ${colors.semiRed.rgba}        | ${colors.semiRed.hexAlpha}
     ${colors.semiRed.rgbaNoSpace} | ${colors.semiRed.hexAlpha}
+    ${colors.semiRed.rgbaModern}  | ${colors.semiRed.hexAlpha}
     ${colors.semiRed.hsla}        | ${colors.semiRed.hexAlpha}
     ${colors.semiRed.hslaNoSpace} | ${colors.semiRed.hexAlpha}
+    ${colors.semiRed.hslaModern}  | ${colors.semiRed.hexAlpha}
     ${colors.orange.hsl}          | ${colors.orange.hex}
     ${colors.yellow.hsl}          | ${colors.yellow.hex}
     ${colors.lime.hsl}            | ${colors.lime.hex}

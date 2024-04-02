@@ -23,23 +23,31 @@ describe('mixWhite()', () => {
     ${colors.black.hexShort}    | ${0.5}  | ${colors.gray.hex}
     ${colors.black.rgb}         | ${0.5}  | ${colors.gray.hex}
     ${colors.black.rgbNoSpace}  | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.rgbModern}   | ${0.5}  | ${colors.gray.hex}
     ${colors.black.rgba}        | ${0.5}  | ${colors.gray.hex}
     ${colors.black.rgbaNoSpace} | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.rgbaModern}  | ${0.5}  | ${colors.gray.hex}
     ${colors.black.hsl}         | ${0.5}  | ${colors.gray.hex}
     ${colors.black.hslNoSpace}  | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.hslModern}   | ${0.5}  | ${colors.gray.hex}
     ${colors.black.hsla}        | ${0.5}  | ${colors.gray.hex}
     ${colors.black.hslaNoSpace} | ${0.5}  | ${colors.gray.hex}
+    ${colors.black.hslaModern}  | ${0.5}  | ${colors.gray.hex}
     ${colors.red.hex}           | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.hexAlpha}      | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.hexShort}      | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.rgb}           | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.rgbNoSpace}    | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.rgbModern}     | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.rgba}          | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.rgbaNoSpace}   | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.rgbaModern}    | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.hsl}           | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.hslNoSpace}    | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.hslModern}     | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.hsla}          | ${0.5}  | ${colors.lightRed.hex}
     ${colors.red.hslaNoSpace}   | ${0.5}  | ${colors.lightRed.hex}
+    ${colors.red.hslaModern}    | ${0.5}  | ${colors.lightRed.hex}
   `('returns $expectedResult given $input, $ratio', ({ input, ratio, expectedResult }) => {
     const result = mixWhite(input, ratio);
 

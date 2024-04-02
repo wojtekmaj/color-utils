@@ -29,23 +29,31 @@ describe('mix()', () => {
     ${colors.white.hexShort}    | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
     ${colors.white.rgb}         | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
     ${colors.white.rgbNoSpace}  | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgbModern}   | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
     ${colors.white.rgba}        | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
     ${colors.white.rgbaNoSpace} | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.rgbaModern}  | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
     ${colors.white.hsl}         | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
     ${colors.white.hslNoSpace}  | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hslModern}   | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
     ${colors.white.hsla}        | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
     ${colors.white.hslaNoSpace} | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
+    ${colors.white.hslaModern}  | ${colors.black.hex} | ${0.5}  | ${colors.gray.hex}
     ${colors.red.hex}           | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.hexAlpha}      | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.hexShort}      | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.rgb}           | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.rgbNoSpace}    | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgbModern}     | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.rgba}          | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.rgbaNoSpace}   | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.rgbaModern}    | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.hsl}           | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.hslNoSpace}    | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hslModern}     | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.hsla}          | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
     ${colors.red.hslaNoSpace}   | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
+    ${colors.red.hslaModern}    | ${colors.black.hex} | ${0.5}  | ${colors.darkRed.hex}
   `(
     'returns $expectedResult given $color1, $color2, $ratio',
     ({ color1, color2, ratio, expectedResult }) => {

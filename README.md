@@ -28,9 +28,13 @@ alpha('#f00', 0.5); // "rgba(255, 0, 0, 0.5)"
 alpha('#00ff00', 0.1); // "rgba(0, 255, 0, 0.1)"
 alpha('#0000ff80', 0.1); // "rgba(0, 0, 255, 0.1)"
 alpha('rgb(255, 0, 0)', 0.5); // "rgba(255, 0, 0, 0.5)"
+alpha('rgb(255 0 0)', 0.5); // "rgba(255, 0, 0, 0.5)"
 alpha('rgba(0, 0, 255, 0.5)', 0.1); // "rgba(0, 0, 255, 0.1)"
+alpha('rgb(0 0 255 / 0.5)', 0.1); // "rgba(0, 0, 255, 0.1)"
 alpha('hsl(0, 100%, 50%)', 0.5); // "rgba(255, 0, 0, 0.5)"
+alpha('hsl(0 100% 50%)', 0.5); // "rgba(255, 0, 0, 0.5)"
 alpha('hsla(0, 100%, 50%, 0.5)', 0.1); // "rgba(255, 0, 0, 0.1)"
+alpha('hsla(0 100% 50% / 0.5)', 0.1); // "rgba(255, 0, 0, 0.1)"
 ```
 
 ### `mix()`
@@ -44,7 +48,9 @@ import { mix } from '@wojtekmaj/color-utils';
 
 mix('#ff0000', '#000', 0.5); // "#800000"
 mix('rgb(255, 0, 0)', '#fff', 0.5); // "#ff8080"
+mix('rgb(255 0 0)', '#fff', 0.5); // "#ff8080"
 mix('hsl(0, 100%, 50%)', '#000000', 0.5); // "#800000"
+mix('hsl(0 100% 50%)', '#000000', 0.5); // "#800000"
 ```
 
 ### `mixBlack()`
@@ -58,7 +64,9 @@ import { mixBlack } from '@wojtekmaj/color-utils';
 
 mixBlack('#ff0000', 0.5); // "#800000"
 mixBlack('rgb(255, 0, 0)', 0.5); // "#800000"
+mixBlack('rgb(255 0 0)', 0.5); // "#800000"
 mixBlack('hsl(0, 100%, 50%)', 0.5); // "#800000"
+mixBlack('hsl(0 100% 50%)', 0.5); // "#800000"
 ```
 
 ### `mixWhite()`
@@ -72,7 +80,9 @@ import { mixWhite } from '@wojtekmaj/color-utils';
 
 mixWhite('#ff0000', 0.5); // "#ff8080"
 mixWhite('rgb(255, 0, 0)', 0.5); // "#ff8080"
+mixWhite('rgb(255 0 0)', 0.5); // "#ff8080"
 mixWhite('hsl(0, 100%, 50%)', 0.5); // "#ff8080"
+mixWhite('hsl(0 100% 50%)', 0.5); // "#ff8080"
 ```
 
 ### `toHex()`
@@ -85,10 +95,15 @@ Converts color to hex format.
 import { toHex } from '@wojtekmaj/color-utils';
 
 toHex('rgb(255, 0, 0)'); // "#ff0000"
+toHex('rgb(255 0 0)'); // "#ff0000"
 toHex('rgb(0, 255, 0)'); // "#00ff00"
+toHex('rgb(0 255 0)'); // "#00ff00"
 toHex('rgba(0, 0, 255, 0.5)'); // "#0000ff80"
+toHex('rgb(0 0 255 / 0.5)'); // "#0000ff80"
 toHex('hsl(0, 100%, 50%)'); // "#ff0000"
+toHex('hsl(0 100% 50%)'); // "#ff0000"
 toHex('hsla(0, 100%, 50%, 0.5)'); // "#ff000080"
+toHex('hsl(0 100% 50% / 0.5)'); // "#ff000080"
 ```
 
 ### `toHsl()`
@@ -104,7 +119,9 @@ toHsl('#f00'); // "hsl(0, 100%, 50%)"
 toHsl('#00ff00'); // "hsl(120, 100%, 50%)"
 toHsl('#0000ff80'); // "hsla(240, 100%, 50%, 0.5)"
 toHsl('rgb(255, 0, 0)'); // "hsl(0, 100%, 50%)"
+toHsl('rgb(255 0 0)'); // "hsl(0, 100%, 50%)"
 toHsl('rgb(255, 0, 0, 0.5)'); // "hsla(0, 100%, 50%, 0.5)"
+toHsl('rgb(255 0 0 / 0.5)'); // "hsla(0, 100%, 50%, 0.5)"
 ```
 
 ### `toObject()`
@@ -120,10 +137,15 @@ toObject('#f00'); // { r: 255, g: 0, b: 0 }
 toObject('#00ff00'); // { r: 0, g: 255, b: 0 }
 toObject('#0000ff80'); // { r: 0, g: 0, b: 255, a: 0.5 }
 toObject('rgb(255, 0, 0)'); // { r: 255, g: 0, b: 0 }
+toObject('rgb(255 0 0)'); // { r: 255, g: 0, b: 0 }
 toObject('rgb(0, 255, 0)'); // { r: 0, g: 255, b: 0 }
+toObject('rgb(0 255 0)'); // { r: 0, g: 255, b: 0 }
 toObject('rgba(0, 0, 255, 0.5)'); // { r: 0, g: 0, b: 255, a: 0.5 }
+toObject('rgba(0 0 255 / 0.5)'); // { r: 0, g: 0, b: 255, a: 0.5 }
 toObject('hsl(0, 100%, 50%)'); // { r: 255, g: 0, b: 0 }
+toObject('hsl(0 100% 50%)'); // { r: 255, g: 0, b: 0 }
 toObject('hsla(0, 100%, 50%, 0.5)'); // { r: 255, g: 0, b: 0, a: 0.5 }
+toObject('hsl(0 100% 50% / 0.5)'); // { r: 255, g: 0, b: 0, a: 0.5 }
 ```
 
 ### `toRgb()`
@@ -139,7 +161,9 @@ toRgb('#f00'); // "rgb(255, 0, 0)"
 toRgb('#00ff00'); // "rgb(0, 255, 0)"
 toRgb('#0000ff80'); // "rgba(0, 0, 255, 0.5)"
 toRgb('hsl(0, 100%, 50%)'); // "rgb(255, 0, 0)"
+toRgb('hsl(0 100% 50%)'); // "rgb(255, 0, 0)"
 toRgb('hsla(0, 100%, 50%, 0.5)'); // "rgb(255, 0, 0, 0.5)"
+toRgb('hsl(0 100% 50% / 0.5)'); // "rgb(255, 0, 0, 0.5)"
 ```
 
 ## License
