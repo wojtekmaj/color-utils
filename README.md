@@ -10,7 +10,7 @@ A collection of color-related utilities.
 - Import by adding `import * as colorUtils from '@wojtekmaj/color-utils'`.
 - Do stuff with it!
   ```ts
-  toRgb('#ff0000'); // "rgb(255, 0, 0)"
+  toRgb('#ff0000'); // "rgb(255 0 0)"
   ```
 
 ## User guide
@@ -24,17 +24,17 @@ Adds/changes alpha channel in a given color.
 ```ts
 import { alpha } from '@wojtekmaj/color-utils';
 
-alpha('#f00', 0.5); // "rgba(255, 0, 0, 0.5)"
-alpha('#00ff00', 0.1); // "rgba(0, 255, 0, 0.1)"
-alpha('#0000ff80', 0.1); // "rgba(0, 0, 255, 0.1)"
-alpha('rgb(255, 0, 0)', 0.5); // "rgba(255, 0, 0, 0.5)"
-alpha('rgb(255 0 0)', 0.5); // "rgba(255, 0, 0, 0.5)"
-alpha('rgba(0, 0, 255, 0.5)', 0.1); // "rgba(0, 0, 255, 0.1)"
-alpha('rgb(0 0 255 / 0.5)', 0.1); // "rgba(0, 0, 255, 0.1)"
-alpha('hsl(0, 100%, 50%)', 0.5); // "rgba(255, 0, 0, 0.5)"
-alpha('hsl(0 100% 50%)', 0.5); // "rgba(255, 0, 0, 0.5)"
-alpha('hsla(0, 100%, 50%, 0.5)', 0.1); // "rgba(255, 0, 0, 0.1)"
-alpha('hsla(0 100% 50% / 0.5)', 0.1); // "rgba(255, 0, 0, 0.1)"
+alpha('#f00', 0.5); // "rgb(255 0 0 / 0.5)"
+alpha('#00ff00', 0.1); // "rgb(0 255 0 / 0.1)"
+alpha('#0000ff80', 0.1); // "rgb(0 0 255 / 0.1)"
+alpha('rgb(255, 0, 0)', 0.5); // "rgb(255 0 0 / 0.5)"
+alpha('rgb(255 0 0)', 0.5); // "rgb(255 0 0 / 0.5)"
+alpha('rgba(0, 0, 255, 0.5)', 0.1); // "rgb(0 0 255 / 0.1)"
+alpha('rgb(0 0 255 / 0.5)', 0.1); // "rgb(0 0 255 / 0.1)"
+alpha('hsl(0, 100%, 50%)', 0.5); // "rgb(255 0 0 / 0.5)"
+alpha('hsl(0 100% 50%)', 0.5); // "rgb(255 0 0 / 0.5)"
+alpha('hsla(0, 100%, 50%, 0.5)', 0.1); // "rgb(255 0 0 / 0.1)"
+alpha('hsla(0 100% 50% / 0.5)', 0.1); // "rgb(255 0 0 / 0.1)"
 ```
 
 ### `mix()`
@@ -108,20 +108,20 @@ toHex('hsl(0 100% 50% / 0.5)'); // "#ff000080"
 
 ### `toHsl()`
 
-Converts color to hsl(…) or hsla(…) format, whichever is applicable.
+Converts color to hsl(…) format.
 
 #### Sample usage
 
 ```ts
 import { toHsl } from '@wojtekmaj/color-utils';
 
-toHsl('#f00'); // "hsl(0, 100%, 50%)"
-toHsl('#00ff00'); // "hsl(120, 100%, 50%)"
-toHsl('#0000ff80'); // "hsla(240, 100%, 50%, 0.5)"
-toHsl('rgb(255, 0, 0)'); // "hsl(0, 100%, 50%)"
-toHsl('rgb(255 0 0)'); // "hsl(0, 100%, 50%)"
-toHsl('rgba(255, 0, 0, 0.5)'); // "hsla(0, 100%, 50%, 0.5)"
-toHsl('rgb(255 0 0 / 0.5)'); // "hsla(0, 100%, 50%, 0.5)"
+toHsl('#f00'); // "hsl(0 100% 50%)"
+toHsl('#00ff00'); // "hsl(120 100% 50%)"
+toHsl('#0000ff80'); // "hsl(240 100% 50% / 0.5)"
+toHsl('rgb(255, 0, 0)'); // "hsl(0 100% 50%)"
+toHsl('rgb(255 0 0)'); // "hsl(0 100% 50%)"
+toHsl('rgba(255, 0, 0, 0.5)'); // "hsl(0 100% 50% / 0.5)"
+toHsl('rgb(255 0 0 / 0.5)'); // "hsl(0 100% 50% / 0.5)"
 ```
 
 ### `toObject()`
@@ -150,20 +150,20 @@ toObject('hsl(0 100% 50% / 0.5)'); // { r: 255, g: 0, b: 0, a: 0.5 }
 
 ### `toRgb()`
 
-Converts color to rgb(…) or rgba(…) format, whichever is applicable.
+Converts color to rgb(…) format.
 
 #### Sample usage
 
 ```ts
 import { toRgb } from '@wojtekmaj/color-utils';
 
-toRgb('#f00'); // "rgb(255, 0, 0)"
-toRgb('#00ff00'); // "rgb(0, 255, 0)"
-toRgb('#0000ff80'); // "rgba(0, 0, 255, 0.5)"
-toRgb('hsl(0, 100%, 50%)'); // "rgb(255, 0, 0)"
-toRgb('hsl(0 100% 50%)'); // "rgb(255, 0, 0)"
-toRgb('hsla(0, 100%, 50%, 0.5)'); // "rgba(255, 0, 0, 0.5)"
-toRgb('hsl(0 100% 50% / 0.5)'); // "rgba(255, 0, 0, 0.5)"
+toRgb('#f00'); // "rgb(255 0 0)"
+toRgb('#00ff00'); // "rgb(0 255 0)"
+toRgb('#0000ff80'); // "rgb(0 0 255 / 0.5)"
+toRgb('hsl(0, 100%, 50%)'); // "rgb(255 0 0)"
+toRgb('hsl(0 100% 50%)'); // "rgb(255 0 0)"
+toRgb('hsla(0, 100%, 50%, 0.5)'); // "rgb(255 0 0 / 0.5)"
+toRgb('hsl(0 100% 50% / 0.5)'); // "rgb(255 0 0 / 0.5)"
 ```
 
 ## License

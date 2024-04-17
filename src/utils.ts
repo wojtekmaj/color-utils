@@ -38,10 +38,10 @@ export function objectToRgb(rgbObject?: RgbObject | null): RgbString | RgbaStrin
 
   const { r, g, b, a } = rgbObject;
 
-  const rgb = [r, g, b].join(', ');
+  const rgb = [r, g, b].join(' ');
 
   if (a !== undefined && a !== 1) {
-    return `rgba(${rgb}, ${a})`;
+    return `rgb(${rgb} / ${a})`;
   }
 
   return `rgb(${rgb})`;

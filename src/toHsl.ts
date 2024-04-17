@@ -43,18 +43,20 @@ function objectToHsl(rgbObject: RgbObject): HslString | HslaString {
   const s = Math.round(sRatio * 100);
   const l = Math.round(lRatio * 100);
 
+  const hsl = [`${h}`, `${s}%`, `${l}%`].join(' ');
+
   if (a !== undefined && a !== 1) {
-    return `hsla(${h}, ${s}%, ${l}%, ${a})`;
+    return `hsl(${hsl} / ${a})`;
   }
 
-  return `hsl(${h}, ${s}%, ${l}%)`;
+  return `hsl(${hsl})`;
 }
 
 /**
- * Converts color to hsl(…) or hsla(…) format, whichever is applicable.
+ * Converts color to hsl(…) format.
  *
  * @param {Color} color Color as hex, rgb(…), rgba(…), hsl(…), hsla(…) or { r, g, b, a? } object
- * @returns {HslString | HslaString} Color in hsl(…) or hsla(…) format, whichever is applicable
+ * @returns {HslString | HslaString} Color in hsl(…) format
  */
 export default function toHsl(color: Color): HslString | HslaString {
   const rgbObject = toObject(color);
