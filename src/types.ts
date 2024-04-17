@@ -7,6 +7,7 @@ export type RgbString = `rgb(${string})`;
 export type RgbaString = `rgba(${string})`;
 export type HslString = `hsl(${string})`;
 export type HslaString = `hsla(${string})`;
+export type LabString = `lab(${string})`;
 
 export type RgbObject = {
   r: NumberFrom0To255;
@@ -22,4 +23,5 @@ export type Color =
   | RgbaString
   | HslString
   | HslaString
+  | LabString
   | RgbObject;
