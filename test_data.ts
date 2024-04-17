@@ -24,6 +24,7 @@ export const colors = {
     hsla: 'hsla(0, 0%, 100%, 1)',
     hslaNoSpace: 'hsla(0,0%,100%,1)',
     hslaModern: 'hsl(0 0% 100% / 1)',
+    lab: 'lab(100 0 0)',
     object: { r: 255, g: 255, b: 255 },
   },
   semiWhite: {
@@ -42,6 +43,7 @@ export const colors = {
     hsla: 'hsla(0, 0%, 100%, 0.5)',
     hslaNoSpace: 'hsla(0,0%,100%,0.5)',
     hslaModern: 'hsl(0 0% 100% / 0.5)',
+    lab: 'lab(100 0 0 / 0.5)',
     object: { r: 255, g: 255, b: 255, a: 0.5 },
   },
   black: {
@@ -60,6 +62,7 @@ export const colors = {
     hsla: 'hsla(0, 0%, 0%, 1)',
     hslaNoSpace: 'hsla(0,0%,0%,1)',
     hslaModern: 'hsl(0 0% 0% / 1)',
+    lab: 'lab(0 0 0)',
     object: { r: 0, g: 0, b: 0 },
   },
   gray: {
@@ -77,6 +80,7 @@ export const colors = {
     hsla: 'hsla(0, 0%, 50%, 1)',
     hslaNoSpace: 'hsla(0,0%,50%,1)',
     hslaModern: 'hsl(0 0% 50% / 1)',
+    lab: 'lab(53.585 0 0)',
     object: { r: 128, g: 128, b: 128 },
   },
   red: {
@@ -95,6 +99,7 @@ export const colors = {
     hsla: 'hsla(0, 100%, 50%, 1)',
     hslaNoSpace: 'hsla(0,100%,50%,1)',
     hslaModern: 'hsl(0 100% 50% / 1)',
+    lab: 'lab(53.241 80.092 67.203)',
     object: { r: 255, g: 0, b: 0 },
   },
   lightRed: {
@@ -112,6 +117,7 @@ export const colors = {
     hsla: 'hsla(0, 100%, 75%, 1)',
     hslaNoSpace: 'hsla(0,100%,75%,1)',
     hslaModern: 'hsl(0 100% 75% / 1)',
+    lab: 'lab(71.232 45.575 22.875)',
     object: { r: 255, g: 128, b: 128 },
   },
   darkRed: {
@@ -130,6 +136,7 @@ export const colors = {
     hsla: 'hsla(0, 100%, 25%, 1)',
     hslaNoSpace: 'hsla(0,100%,25%,1)',
     hslaModern: 'hsl(0 100% 25% / 1)',
+    lab: 'lab(25.527 47.463 38.972)',
     object: { r: 128, g: 0, b: 0 },
   },
   semiRed: {
@@ -148,6 +155,7 @@ export const colors = {
     hsla: 'hsla(0, 100%, 50%, 0.5)',
     hslaNoSpace: 'hsla(0,100%,50%,0.5)',
     hslaModern: 'hsl(0 100% 50% / 0.5)',
+    lab: 'lab(53.241 80.092 67.203 / 0.5)',
     object: { r: 255, g: 0, b: 0, a: 0.5 },
   },
   orange: {
@@ -166,6 +174,7 @@ export const colors = {
     hsla: 'hsla(30, 100%, 50%, 1)',
     hslaNoSpace: 'hsla(30,100%,50%,1)',
     hslaModern: 'hsl(30 100% 50% / 1)',
+    lab: 'lab(67.055 42.826 74.018)',
     object: { r: 255, g: 128, b: 0 },
   },
   yellow: {
@@ -184,6 +193,7 @@ export const colors = {
     hsla: 'hsla(60, 100%, 50%)',
     hslaNoSpace: 'hsla(60,100%,50%)',
     hslaModern: 'hsl(60 100% 50% / 1)',
+    lab: 'lab(97.139 -21.554 94.478)',
     object: { r: 255, g: 255, b: 0 },
   },
   lime: {
@@ -202,6 +212,7 @@ export const colors = {
     hsla: 'hsla(90, 100%, 50%)',
     hslaNoSpace: 'hsla(90,100%,50%)',
     hslaModern: 'hsl(90 100% 50% / 1)',
+    lab: 'lab(89.909 -67.786 85.823)',
     object: { r: 128, g: 255, b: 0 },
   },
   green: {
@@ -220,6 +231,7 @@ export const colors = {
     hsla: 'hsla(120, 100%, 50%)',
     hslaNoSpace: 'hsla(120,100%,50%)',
     hslaModern: 'hsl(120 100% 50% / 1)',
+    lab: 'lab(87.735 -86.183 83.179)',
     object: { r: 0, g: 255, b: 0 },
   },
   teal: {
@@ -238,6 +250,7 @@ export const colors = {
     hsla: 'hsla(150, 100%, 50%)',
     hslaNoSpace: 'hsla(150,100%,50%)',
     hslaModern: 'hsl(150 100% 50% / 1)',
+    lab: 'lab(88.483 -76.75 46.574)',
     object: { r: 0, g: 255, b: 128 },
   },
   cyan: {
@@ -256,6 +269,7 @@ export const colors = {
     hsla: 'hsla(180, 100%, 50%)',
     hslaNoSpace: 'hsla(180,100%,50%)',
     hslaModern: 'hsl(180 100% 50% / 1)',
+    lab: 'lab(91.113 -48.088 -14.131)',
     object: { r: 0, g: 255, b: 255 },
   },
   lightblue: {
@@ -274,6 +288,7 @@ export const colors = {
     hsla: 'hsla(210, 100%, 50%)',
     hslaNoSpace: 'hsla(210,100%,50%)',
     hslaModern: 'hsl(210 100% 50% / 1)',
+    lab: 'lab(54.715 18.777 -70.918)',
     object: { r: 0, g: 128, b: 255 },
   },
   blue: {
@@ -292,6 +307,7 @@ export const colors = {
     hsla: 'hsla(240, 100%, 50%)',
     hslaNoSpace: 'hsla(240,100%,50%)',
     hslaModern: 'hsl(240 100% 50% / 1)',
+    lab: 'lab(32.297 79.188 -107.86)',
     object: { r: 0, g: 0, b: 255 },
   },
   purple: {
@@ -310,6 +326,7 @@ export const colors = {
     hsla: 'hsla(270, 100%, 50%)',
     hslaNoSpace: 'hsla(270,100%,50%)',
     hslaModern: 'hsl(270 100% 50% / 1)',
+    lab: 'lab(40.91 83.168 -93.29)',
     object: { r: 128, g: 0, b: 255 },
   },
   pink: {
@@ -328,6 +345,7 @@ export const colors = {
     hsla: 'hsla(300, 100%, 50%)',
     hslaNoSpace: 'hsla(300,100%,50%)',
     hslaModern: 'hsl(300 100% 50% / 1)',
+    lab: 'lab(60.324 98.234 -60.825)',
     object: { r: 255, g: 0, b: 255 },
   },
   magenta: {
@@ -346,6 +364,7 @@ export const colors = {
     hsla: 'hsla(330, 100%, 50%)',
     hslaNoSpace: 'hsla(330,100%,50%)',
     hslaModern: 'hsl(330 100% 50% / 1)',
+    lab: 'lab(54.892 84.535 4.079)',
     object: { r: 255, g: 0, b: 128 },
   },
 } satisfies Record<
@@ -366,6 +385,7 @@ export const colors = {
     hsla: HslaString;
     hslaNoSpace: HslaString;
     hslaModern: HslString;
+    lab: string;
     object: RgbObject;
   }
 >;

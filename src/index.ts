@@ -4,7 +4,8 @@ import mixWhite from './mixWhite.js';
 import mixBlack from './mixBlack.js';
 import toHex from './toHex.js';
 import toHsl from './toHsl.js';
+import toLab from './toLab.js';
 import toObject from './toObject.js';
 import toRgb from './toRgb.js';
 
-export { alpha, mix, mixWhite, mixBlack, toHex, toHsl, toObject, toRgb };
+export { alpha, mix, mixWhite, mixBlack, toHex, toHsl, toLab, toObject, toRgb };
