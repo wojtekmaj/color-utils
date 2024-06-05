@@ -22,7 +22,7 @@ function isRgbObject(rgbObject?: unknown): rgbObject is RgbObject {
 }
 
 function hexColorToNumber(color: string): NumberFrom0To255 {
-  return parseInt(color, 16);
+  return Number.parseInt(color, 16);
 }
 
 function hexAlphaToNumber(color: string): NumberFrom0To1 {

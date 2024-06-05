@@ -35,7 +35,7 @@ export default function mix(
     throw new Error('color2 is required');
   }
 
-  if (isNaN(ratio)) {
+  if (Number.isNaN(Number(ratio))) {
     throw new Error('Invalid ratio');
   }
 
