@@ -35,11 +35,12 @@ export default function mix(
     throw new Error('color2 is required');
   }
 
-  if (isNaN(ratio)) {
+  if (Number.isNaN(Number(ratio))) {
     throw new Error('Invalid ratio');
   }
 
   if (ratio !== 0 && !ratio) {
+    // biome-ignore lint/style/noParameterAssign: This is a valid use case
     ratio = 0.5;
   }
 

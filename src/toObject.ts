@@ -22,7 +22,7 @@ function isRgbObject(rgbObject?: unknown): rgbObject is RgbObject {
 }
 
 function hexColorToNumber(color: string): NumberFrom0To255 {
-  return parseInt(color, 16);
+  return Number.parseInt(color, 16);
 }
 
 function hexAlphaToNumber(color: string): NumberFrom0To1 {
@@ -86,7 +86,7 @@ function hslToObject(hsl: HslString | HslaString): RgbObject {
     );
   }
 
-  // prettier-ignore
+  // biome-ignore format: Carefully formatted to improve readability
   const [
     /* full match */,
     rawH,
@@ -177,7 +177,7 @@ function rgbToObject(rgb: RgbString | RgbaString): RgbObject {
     );
   }
 
-  // prettier-ignore
+  // biome-ignore format: Carefully formatted to improve readability
   const [
     /* full match */,
     rawR,

@@ -19,7 +19,7 @@ export default function alpha(color: Color, a?: NumberFrom0To1): RgbString | Rgb
     throw new Error('Alpha is required');
   }
 
-  if (isNaN(a)) {
+  if (Number.isNaN(Number(a))) {
     throw new Error('Invalid alpha argument provided');
   }
 
