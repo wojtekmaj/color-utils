@@ -38,7 +38,7 @@ function hexToObject(rawHex: HexString | HashHexString): RgbObject {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   const hex = rawHex.replace(
     shorthandRegex,
-    (m: string, r: string, g: string, b: string) => r + r + g + g + b + b,
+    (_m: string, r: string, g: string, b: string) => r + r + g + g + b + b,
   );
 
   const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i.exec(hex);
@@ -216,19 +216,19 @@ export default function toObject(color: Color): RgbObject {
 
   try {
     return hexToObject(color as HexString);
-  } catch (e) {
+  } catch {
     // Ignore
   }
 
   try {
     return rgbToObject(color as RgbString | RgbaString);
-  } catch (e) {
+  } catch {
     // Ignore
   }
 
   try {
     return hslToObject(color as HslString | HslaString);
-  } catch (e) {
+  } catch {
     // Ignore
   }
 
