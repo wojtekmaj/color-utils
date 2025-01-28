@@ -5,20 +5,57 @@ import { colors } from '../test_data.js';
 
 describe('mix()', () => {
   it.each`
+    color1  | color2              | ratio
+    ${null} | ${colors.white.hex} | ${0.5}
+    ${''}   | ${colors.white.hex} | ${0.5}
+  `(
+    'should throw "color1 is required" given $color1, $color2, $ratio',
+    ({ color1, color2, ratio }) => {
+      expect(() => mix(color1, color2, ratio)).toThrow('color1 is required');
+    },
+  );
+
+  it.each`
+    color1      | color2              | ratio
+    ${'potato'} | ${colors.white.hex} | ${0.5}
+  `(
+    'should throw "Invalid color provided" given $color1, $color2, $ratio',
+    ({ color1, color2, ratio }) => {
+      expect(() => mix(color1, color2, ratio)).toThrow('Invalid color provided');
+    },
+  );
+
+  it.each`
+    color1              | color2  | ratio
+    ${colors.white.hex} | ${null} | ${0.5}
+    ${colors.white.hex} | ${''}   | ${0.5}
+  `(
+    'should throw "color2 is required" given $color1, $color2, $ratio',
+    ({ color1, color2, ratio }) => {
+      expect(() => mix(color1, color2, ratio)).toThrow('color2 is required');
+    },
+  );
+
+  it.each`
+    color1              | color2      | ratio
+    ${colors.white.hex} | ${'potato'} | ${0.5}
+  `(
+    'should throw "Invalid color provided" given $color1, $color2, $ratio',
+    ({ color1, color2, ratio }) => {
+      expect(() => mix(color1, color2, ratio)).toThrow('Invalid color provided');
+    },
+  );
+
+  it.each`
     color1              | color2              | ratio
-    ${'potato'}         | ${'potato'}         | ${0.5}
-    ${''}               | ${''}               | ${0.5}
-    ${null}             | ${null}             | ${0.5}
-    ${colors.white.hex} | ${'potato'}         | ${0.5}
-    ${colors.white.hex} | ${''}               | ${0.5}
-    ${colors.white.hex} | ${null}             | ${0.5}
-    ${'potato'}         | ${colors.white.hex} | ${0.5}
-    ${''}               | ${colors.white.hex} | ${0.5}
-    ${null}             | ${colors.white.hex} | ${0.5}
     ${colors.white.hex} | ${colors.black.hex} | ${'potato'}
-  `('should throw given $color1, $color2, $ratio', ({ color1, color2, ratio }) => {
-    expect(() => mix(color1, color2, ratio)).toThrow();
-  });
+    ${colors.white.hex} | ${colors.black.hex} | ${Number.NaN}
+  `(
+    'should throw "Invalid ratio provided" given $color1, $color2, $ratio',
+    ({ color1, color2, ratio }) => {
+      expect(() => mix(color1, color2, ratio)).toThrow('Invalid ratio provided');
+    },
+  );
 
   it.each`
     color1                      | color2              | ratio   | expectedResult

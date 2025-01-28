@@ -10,5 +10,9 @@ import type { Color, HashHexString, NumberFrom0To1 } from './types.js';
  * @returns {HashHexString} Color in hex format
  */
 export default function mixWhite(color: Color, ratio?: NumberFrom0To1): HashHexString {
+  if (!color) {
+    throw new Error('color is required');
+  }
+
   return mix(color, 'fff', ratio);
 }

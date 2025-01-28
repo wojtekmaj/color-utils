@@ -5,13 +5,26 @@ import { colors } from '../test_data.js';
 
 describe('mixWhite()', () => {
   it.each`
-    input               | ratio
-    ${'potato'}         | ${0}
-    ${''}               | ${0}
-    ${null}             | ${0}
+    input   | a
+    ${null} | ${0}
+    ${''}   | ${0}
+  `('should throw "color is required" given $input, $a', ({ input, a }) => {
+    expect(() => mixWhite(input, a)).toThrow('color is required');
+  });
+
+  it.each`
+    input       | a
+    ${'potato'} | ${0}
+  `('should throw "Invalid color provided" given $input, $a', ({ input, a }) => {
+    expect(() => mixWhite(input, a)).toThrow('Invalid color provided');
+  });
+
+  it.each`
+    input               | a
     ${colors.black.hex} | ${'potato'}
-  `('should throw given $input, $ratio', ({ input, ratio }) => {
-    expect(() => mixWhite(input, ratio)).toThrow();
+    ${colors.black.hex} | ${Number.NaN}
+  `('should throw "Invalid ratio provided" given $input, $a', ({ input, a }) => {
+    expect(() => mixWhite(input, a)).toThrow('Invalid ratio provided');
   });
 
   it.each`

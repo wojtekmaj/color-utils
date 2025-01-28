@@ -36,7 +36,7 @@ export default function mix(
   }
 
   if (Number.isNaN(Number(ratio))) {
-    throw new Error('Invalid ratio');
+    throw new Error('Invalid ratio provided');
   }
 
   if (ratio !== 0 && !ratio) {

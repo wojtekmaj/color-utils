@@ -5,15 +5,33 @@ import { colors } from '../test_data.js';
 
 describe('alpha()', () => {
   it.each`
+    input   | a
+    ${null} | ${0}
+    ${''}   | ${0}
+  `('should throw "color is required" given $input, $a', ({ input, a }) => {
+    expect(() => alpha(input, a)).toThrow('color is required');
+  });
+
+  it.each`
+    input       | a
+    ${'potato'} | ${0}
+  `('should throw "Invalid color provided" given $input, $a', ({ input, a }) => {
+    expect(() => alpha(input, a)).toThrow('Invalid color provided');
+  });
+
+  it.each`
     input               | a
-    ${'potato'}         | ${0}
-    ${''}               | ${0}
-    ${null}             | ${0}
-    ${colors.white.hex} | ${'potato'}
-    ${colors.white.hex} | ${''}
     ${colors.white.hex} | ${null}
-  `('should throw given $input, $a', ({ input, a }) => {
-    expect(() => alpha(input, a)).toThrow();
+  `('should throw "alpha is required" given $input, $a', ({ input, a }) => {
+    expect(() => alpha(input, a)).toThrow('alpha is required');
+  });
+
+  it.each`
+    input               | a
+    ${colors.white.hex} | ${'potato'}
+    ${colors.white.hex} | ${Number.NaN}
+  `('should throw "Invalid alpha provided" given $input, $a', ({ input, a }) => {
+    expect(() => alpha(input, a)).toThrow('Invalid alpha provided');
   });
 
   it.each`

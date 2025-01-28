@@ -12,15 +12,15 @@ import type { Color, NumberFrom0To1, RgbaString, RgbString } from './types.js';
  */
 export default function alpha(color: Color, a?: NumberFrom0To1): RgbString | RgbaString {
   if (!color) {
-    throw new Error('Color is required');
+    throw new Error('color is required');
   }
 
-  if (a !== 0 && !a) {
-    throw new Error('Alpha is required');
+  if (a === undefined || a === null) {
+    throw new Error('alpha is required');
   }
 
   if (Number.isNaN(Number(a))) {
-    throw new Error('Invalid alpha argument provided');
+    throw new Error('Invalid alpha provided');
   }
 
   const rgbObject = toObject(color);
