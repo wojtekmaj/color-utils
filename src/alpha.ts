@@ -25,5 +25,5 @@ export default function alpha(color: Color, a?: NumberFrom0To1): RgbString | Rgb
 
   const rgbObject = toObject(color);
 
-  return objectToRgb(rgbObject && { ...rgbObject, a });
+  return objectToRgb({ ...rgbObject, a });
 }
