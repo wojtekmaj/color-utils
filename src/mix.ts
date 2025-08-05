@@ -40,7 +40,6 @@ export default function mix(
   }
 
   if (ratio !== 0 && !ratio) {
-    // biome-ignore lint/style/noParameterAssign: This is a valid use case
     ratio = 0.5;
   }
 
