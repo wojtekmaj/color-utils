@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import toHsl from './toHsl.js';
 
 import { colors } from '../test_data.js';
+import toHsl from './toHsl.js';
 
 describe('toHsl()', () => {
   it.each`

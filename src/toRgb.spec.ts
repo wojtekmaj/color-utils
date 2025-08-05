@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import toRgb from './toRgb.js';
 
 import { colors } from '../test_data.js';
+import toRgb from './toRgb.js';
 
 describe('toRgb()', () => {
   it.each`

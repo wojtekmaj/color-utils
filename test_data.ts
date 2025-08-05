@@ -1,10 +1,10 @@
 import type {
   HashHexString,
-  HslString,
   HslaString,
+  HslString,
+  RgbaString,
   RgbObject,
   RgbString,
-  RgbaString,
 } from './src/types.js';
 
 export const colors = {

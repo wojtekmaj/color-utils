@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import toLab from './toLab.js';
 
 import { colors } from '../test_data.js';
+import toLab from './toLab.js';
 
 describe('toLab()', () => {
   it.each`
