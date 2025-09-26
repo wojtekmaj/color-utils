@@ -7,7 +7,48 @@ import type {
   RgbString,
 } from './src/types.js';
 
-export const colors = {
+type ColorName =
+  | 'black'
+  | 'blue'
+  | 'cyan'
+  | 'darkRed'
+  | 'gray'
+  | 'green'
+  | 'lightblue'
+  | 'lightRed'
+  | 'lime'
+  | 'magenta'
+  | 'orange'
+  | 'pink'
+  | 'purple'
+  | 'red'
+  | 'semiRed'
+  | 'semiWhite'
+  | 'teal'
+  | 'white'
+  | 'yellow';
+
+type ColorDefinition = {
+  hex: HashHexString | undefined;
+  hexAlpha: HashHexString;
+  hexShort?: HashHexString;
+  rgb: RgbString | undefined;
+  rgbNoSpace: RgbString | undefined;
+  rgbModern: RgbString | undefined;
+  rgba: RgbaString;
+  rgbaNoSpace: RgbaString;
+  rgbaModern: RgbString;
+  hsl: HslString | undefined;
+  hslNoSpace: HslString | undefined;
+  hslModern: HslString | undefined;
+  hsla: HslaString;
+  hslaNoSpace: HslaString;
+  hslaModern: HslString;
+  lab: string;
+  object: RgbObject;
+};
+
+export const colors: Record<ColorName, ColorDefinition> = {
   white: {
     hex: '#ffffff',
     hexAlpha: '#ffffffff',
@@ -367,25 +408,4 @@ export const colors = {
     lab: 'lab(54.892 84.535 4.079)',
     object: { r: 255, g: 0, b: 128 },
   },
-} satisfies Record<
-  string,
-  {
-    hex: HashHexString | undefined;
-    hexAlpha: HashHexString;
-    hexShort?: HashHexString;
-    rgb: RgbString | undefined;
-    rgbNoSpace: RgbString | undefined;
-    rgbModern: RgbString | undefined;
-    rgba: RgbaString;
-    rgbaNoSpace: RgbaString;
-    rgbaModern: RgbString;
-    hsl: HslString | undefined;
-    hslNoSpace: HslString | undefined;
-    hslModern: HslString | undefined;
-    hsla: HslaString;
-    hslaNoSpace: HslaString;
-    hslaModern: HslString;
-    lab: string;
-    object: RgbObject;
-  }
->;
+};
