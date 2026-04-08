@@ -8,4 +8,4 @@ import toLab from './toLab.js';
 import toObject from './toObject.js';
 import toRgb from './toRgb.js';
 
-export { alpha, mix, mixWhite, mixBlack, toHex, toHsl, toLab, toObject, toRgb };
+export { alpha, mix, mixBlack, mixWhite, toHex, toHsl, toLab, toObject, toRgb };
