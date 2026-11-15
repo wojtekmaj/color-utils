@@ -9,6 +9,7 @@ A collection of color-related utilities.
 - Install by executing `npm install @wojtekmaj/color-utils` or `yarn add @wojtekmaj/color-utils`.
 - Import by adding `import * as colorUtils from '@wojtekmaj/color-utils'`.
 - Do stuff with it!
+
   ```ts
   toRgb('#ff0000'); // "rgb(255 0 0)"
   ```
